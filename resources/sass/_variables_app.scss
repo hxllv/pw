@@ -1,0 +1,31 @@
+$black: #1a1a1a;
+$white: #dddddd;
+
+$green: #1d995f;
+$nav-green: #1d995fe0;
+$nav-green-blur: #1d995f83;
+
+$form-green-focus: #1d995f27;
+
+$font-family-pirata: "Pirata One", cursive;
+$font-family-roboto: "Roboto", sans-serif;
+
+$white-shadow: 0 0 10px
+    rgba(
+        $color: #fff,
+        $alpha: 0.3
+    );
+$black-shadow: 0 0 10px
+    rgba(
+        $color: #000,
+        $alpha: 0.4
+    );
+
+$linear-gradient-green: linear-gradient(to left, #1c945c, #0d3b26);
+$leaves-image-phone: url("/images/bg.jpg");
+$leaves-image-desktop: url("/images/bgs-small.jpg");
+$leaves-image-desktop-small: url("/images/bgs-smaller.jpg");
+$leaves-image-border: url("/images/bgs-border.jpg");
+
+$cubic-bezier: cubic-bezier(0.55, -1, 0.51, 1.85);
+$cubic-bezier-items: cubic-bezier(0.24, 0.53, 0.68, 0.84);
