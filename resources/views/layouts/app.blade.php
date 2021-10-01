@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}?v=1.0.4" defer></script>
+    <script src="https://kit.fontawesome.com/be4cbb0046.js" crossorigin="anonymous"></script>
 
     @yield('scripts')
 
@@ -42,6 +43,9 @@
             </li>
             <li>
                <a class="btn-nav" id="kontakt-link" href="#kontakt">Kontakt</a>
+            </li>
+            <li id="nav-vue">
+                <shopping-cart></shopping-cart>
             </li>
         </ul>
     </nav>

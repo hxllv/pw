@@ -50,12 +50,13 @@
     <div id="izdelki" class="invis-for-nav"></div>
     <div class="container-i">
         <h1 class="title pirata section-header">Izdelki</h1>
+        <h1 class="bigger-subtitle pirata success">Trenutno razpoložljivi izdelki</h1>
         @foreach ($types as $type)
             <div class="type">
                 <h1 class="subtitle pirata">{{ $type->name }}</h1>
                 <div class="items">       
                     @foreach ($items as $item)
-                        @if ($item->type_id === $type->id)
+                        @if ($item->type_id == $type->id && $item->available)
                             <div class="item" tabindex="0" 
                                 onmouseenter="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})" 
                                 onmouseleave="itemMouseLeave(this)"  
@@ -69,15 +70,9 @@
                                     </picture>
                                 </div>
                                 <div class="details">
-                                    <h1>{{$item->title}}</h1>
-                                    <div>
-                                        <span style="color: {{$item->available ? '#198754' : '#dc3545'}};">
-                                            {{ $item->available ? "Na voljo" : "Ni na voljo" }}
-                                        </span>
-                                        <span>
-                                            | {{ floor($item->price) == $item->price ? str_replace('.00', '.- ', (string)$item->price) : $item->price }}&euro;
-                                        </span>
-                                    </div>
+                                    <h1>{{$item->title}} | {{ floor($item->price) == $item->price ? str_replace('.00', '.- ', (string)$item->price) : $item->price }}&euro;</h1>
+                                    <add-to-cart item-id="{{$item->id}}" item-img="{{$item->main_image}}" item-title="{{$item->title}}" item-price="{{$item->price}}">
+                                    </add-to-cart>
                                     <p>{{ $item->description }}</p>
                                     @foreach ($imgs->where('item_id', '=', $item->id) as $img)
                                         <picture>
@@ -93,6 +88,39 @@
                 </div>
             </div>
         @endforeach
+        <h1 class="bigger-subtitle pirata error">Že prodani izdelki</h1>
+        <div>
+            <div class="items">       
+                @foreach ($items as $item)
+                    @if (!$item->available)
+                        <div class="item" tabindex="0" 
+                            onmouseenter="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})" 
+                            onmouseleave="itemMouseLeave(this)"  
+                            onfocus="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})"
+                            onfocusout="itemMouseLeave(this)">
+                            <div class="item-img">
+                                <picture class="cleary-prep">
+                                    <source media="(min-width:2100px)" srcset="/storage/{{ $item->main_image }}">
+                                    <source media="(min-width:1200px)" srcset="/storage/{{ str_replace('/', '/1000_' , $item->main_image) }}">
+                                    <img loading="lazy" src="/storage/{{ str_replace('/', '/500_' , $item->main_image) }}" alt="{{ $item->title }}">
+                                </picture>
+                            </div>
+                            <div class="details">
+                                <h1>{{$item->title}} | {{ floor($item->price) == $item->price ? str_replace('.00', '.- ', (string)$item->price) : $item->price }}&euro;</h1>
+                                <p>{{ $item->description }}</p>
+                                @foreach ($imgs->where('item_id', '=', $item->id) as $img)
+                                    <picture>
+                                        <source media="(min-width:2100px)" srcset="">
+                                        <source media="(min-width:1200px)" srcset="">
+                                        <img src="" alt="{{ $item->title }} extra">
+                                    </picture>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        </div>
     </div>
 </section>
 <div class="spacer wave flip"></div>

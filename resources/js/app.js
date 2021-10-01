@@ -18,10 +18,17 @@ window.Vue = require("vue").default;
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 Vue.component(
     "send-message",
     require("./components/SendMessageComponent.vue").default
+);
+Vue.component(
+    "shopping-cart",
+    require("./components/ShoppingCartComponent.vue").default
+);
+Vue.component(
+    "add-to-cart",
+    require("./components/AddToCartComponent.vue").default
 );
 
 /**
@@ -32,6 +39,10 @@ Vue.component(
 
 const app = new Vue({
     el: "#app"
+});
+
+const navVue = new Vue({
+    el: "#nav-vue"
 });
 
 /* ==========================
