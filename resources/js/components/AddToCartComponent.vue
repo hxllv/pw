@@ -14,7 +14,7 @@ export default {
             console.log(self.itemImg);
 
             cart[self.itemId] = {
-                img: self.itemImg,
+                img: self.itemImg.replace("/", "/500_"),
                 title: self.itemTitle,
                 price: self.itemPrice
             };

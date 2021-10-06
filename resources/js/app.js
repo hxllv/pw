@@ -45,6 +45,10 @@ const navVue = new Vue({
     el: "#nav-vue"
 });
 
+if (!window.localStorage.getItem("cart")) {
+    window.localStorage.setItem("cart", JSON.stringify({}));
+}
+
 /* ==========================
    intersection observers
 ========================== */

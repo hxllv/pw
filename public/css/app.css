@@ -1,11 +1,12 @@
 @import url(https://fonts.googleapis.com/css2?family=Pirata+One&family=Roboto:wght@500;900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Yaldevi:wght@500&display=swap);
 /* ============
    global
 =============*/
 html,
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Yaldevi", sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
   background-color: #dddddd;
@@ -454,10 +455,6 @@ nav.off-start {
   background-color: #1d995fe0;
 }
 
-img {
-  max-height: 60px;
-}
-
 .cart-div {
   position: relative;
 }
@@ -474,23 +471,53 @@ img {
 
 .cart-items {
   position: absolute;
-  top: 36px;
+  top: 60px;
   right: 0;
   width: 300px;
   transition: transform ease 0.3s;
   transform: scaleY(0);
   transform-origin: top;
   padding: 1em;
-  background-color: green;
+  background: #1d995f;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   border-radius: 10px 0 10px 10px;
+}
+.cart-items img {
+  max-height: 60px;
 }
 
 .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid black;
   margin: 0.5em 0;
+}
+.cart-item a {
+  color: #dc3545;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  font-weight: 700;
+  cursor: pointer;
+}
+.cart-item-title {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.cart-checkout {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  text-decoration: none;
+  padding: 0.7em 0.5em;
+  margin-top: 2em;
+  color: #dddddd;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #1fa466, #1a8a56);
+  box-shadow: 5px 5px 10px #198251, -5px -5px 10px #21b06d;
+}
+.cart-checkout:hover {
+  background: #1d995f;
+  box-shadow: inset 5px 5px 10px #198251, inset -5px -5px 10px #21b06d;
 }
 
 .logo-link {
@@ -725,7 +752,8 @@ footer .spacer.wave-start.flip {
 .details h1,
 .details p,
 .details img,
-.details div {
+.details div,
+.details a {
   opacity: 0;
   --delay: 0s;
   --time: 0.05s;
@@ -786,7 +814,8 @@ footer .spacer.wave-start.flip {
 .item.on .details h1,
 .item.on .details p,
 .item.on .details img,
-.item.on .details div {
+.item.on .details div,
+.item.on .details a {
   opacity: 1;
   --time: 0.3s;
   --delay: 0.3s;

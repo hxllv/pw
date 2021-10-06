@@ -4,16 +4,17 @@
             <i class="fas fa-shopping-cart"></i>
         </a>
         <div class="cart-items">
-            <div class="empty-cart" v-if="!Object.keys(this.cartItems).length">
+            <div
+                class="empty-cart"
+                v-if="this.cartItems && !Object.keys(this.cartItems).length"
+            >
                 Voziček je prazen!
             </div>
             <div class="cart-item" v-for="(item, id) in cartItems" :key="id">
                 <img :src="`/storage/${item.img}`" />
-
-                <span>
+                <span class="cart-item-title">
                     {{ item.title }}
                 </span>
-                <span> </span>
                 <a v-on:click="removeItemFromCart(id)">
                     X
                 </a>
@@ -21,7 +22,7 @@
             <a
                 class="cart-checkout"
                 href=""
-                v-if="Object.keys(this.cartItems).length"
+                v-if="this.cartItems && Object.keys(this.cartItems).length"
             >
                 Checkout
             </a>

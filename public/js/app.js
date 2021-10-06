@@ -1859,7 +1859,7 @@ __webpack_require__.r(__webpack_exports__);
       var cart = JSON.parse(window.localStorage.getItem("cart"));
       console.log(self.itemImg);
       cart[self.itemId] = {
-        img: self.itemImg,
+        img: self.itemImg.replace("/", "/500_"),
         title: self.itemTitle,
         price: self.itemPrice
       };
@@ -2006,6 +2006,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -37958,7 +37959,7 @@ var render = function() {
       "div",
       { staticClass: "cart-items" },
       [
-        !Object.keys(this.cartItems).length
+        this.cartItems && !Object.keys(this.cartItems).length
           ? _c("div", { staticClass: "empty-cart" }, [
               _vm._v("\n            Voziček je prazen!\n        ")
             ])
@@ -37968,13 +37969,11 @@ var render = function() {
           return _c("div", { key: id, staticClass: "cart-item" }, [
             _c("img", { attrs: { src: "/storage/" + item.img } }),
             _vm._v(" "),
-            _c("span", [
+            _c("span", { staticClass: "cart-item-title" }, [
               _vm._v(
                 "\n                " + _vm._s(item.title) + "\n            "
               )
             ]),
-            _vm._v(" "),
-            _c("span"),
             _vm._v(" "),
             _c(
               "a",
@@ -37990,7 +37989,7 @@ var render = function() {
           ])
         }),
         _vm._v(" "),
-        Object.keys(this.cartItems).length
+        this.cartItems && Object.keys(this.cartItems).length
           ? _c("a", { staticClass: "cart-checkout", attrs: { href: "" } }, [
               _vm._v("\n            Checkout\n        ")
             ])
@@ -50283,11 +50282,16 @@ var app = new Vue({
 var navVue = new Vue({
   el: "#nav-vue"
 });
+
+if (!window.localStorage.getItem("cart")) {
+  window.localStorage.setItem("cart", JSON.stringify({}));
+}
 /* ==========================
    intersection observers
 ========================== */
 
 /* navbar + footer observer */
+
 
 var navbar = document.querySelector("nav");
 var logo = document.querySelector(".logo-link");

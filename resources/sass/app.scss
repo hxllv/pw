@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Pirata+One&family=Roboto:wght@500;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yaldevi:wght@500&display=swap");
 @import "variables_app";
 
 /* ============
@@ -8,7 +9,7 @@
 html,
 body {
     margin: 0;
-    font-family: $font-family-roboto;
+    font-family: $font-family-yaldevi;
     overflow-x: hidden;
     scroll-behavior: smooth;
     background-color: $white;
@@ -434,10 +435,6 @@ nav {
     }
 }
 
-img {
-    max-height: 60px;
-}
-
 .cart-div {
     position: relative;
 }
@@ -454,23 +451,55 @@ img {
 
 .cart-items {
     position: absolute;
-    top: 36px;
+    top: 60px;
     right: 0;
     width: 300px;
     transition: transform ease 0.3s;
     transform: scaleY(0);
     transform-origin: top;
     padding: 1em;
-    background-color: green;
+    background: $green;
+    box-shadow: $black-shadow;
     border-radius: 10px 0 10px 10px;
+
+    img {
+        max-height: 60px;
+    }
 }
 
 .cart-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid black;
     margin: 0.5em 0;
+
+    a {
+        color: #dc3545;
+        text-shadow: $black-shadow;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    &-title {
+        text-shadow: $white-shadow;
+    }
+}
+
+.cart-checkout {
+    width: fit-content;
+    margin: auto;
+    text-decoration: none;
+    padding: 0.7em 0.5em;
+    margin-top: 2em;
+    color: $white;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #1fa466, #1a8a56);
+    box-shadow: 5px 5px 10px #198251, -5px -5px 10px #21b06d;
+
+    &:hover {
+        background: #1d995f;
+        box-shadow: inset 5px 5px 10px #198251, inset -5px -5px 10px #21b06d;
+    }
 }
 
 .logo-link {
@@ -722,7 +751,8 @@ footer {
     h1,
     p,
     img,
-    div {
+    div,
+    a {
         opacity: 0;
 
         --delay: 0s;
@@ -789,7 +819,8 @@ footer {
         h1,
         p,
         img,
-        div {
+        div,
+        a {
             opacity: 1;
             --time: 0.3s;
             --delay: 0.3s;
