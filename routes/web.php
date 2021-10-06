@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/', [App\Http\Controllers\HomeController::class, 'mail'])->name('mail');
-Route::get('/email', function() {
-    return new MessageMail(["ime" => "penis", "priimek" => "penis", "email" => "penis", "tel" => "penis", "zadeva" => "penis", "sporocilo" => "penis"]);
-});
+Route::get('/checkout', [App\Http\Controllers\HomeController::class, 'checkout'])->name('checkout');
 
 Route::group(['prefix' => 'admin'], function() {
     Auth::routes();

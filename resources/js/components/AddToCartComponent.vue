@@ -1,5 +1,5 @@
 <template>
-    <a v-on:click="addToCart">
+    <a class="add-to-cart" v-on:click="addToCart">
         Add to cart
     </a>
 </template>

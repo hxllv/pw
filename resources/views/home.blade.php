@@ -62,7 +62,7 @@
                                 onmouseleave="itemMouseLeave(this)"  
                                 onfocus="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})"
                                 onfocusout="itemMouseLeave(this)">
-                                <div class="item-img">
+                                <div class="item-img" style="z-index: 1;">
                                     <picture class="cleary-prep">
                                         <source media="(min-width:2100px)" srcset="/storage/{{ $item->main_image }}">
                                         <source media="(min-width:1200px)" srcset="/storage/{{ str_replace('/', '/1000_' , $item->main_image) }}">
@@ -70,7 +70,7 @@
                                     </picture>
                                 </div>
                                 <div class="details">
-                                    <h1>{{$item->title}} | {{ floor($item->price) == $item->price ? str_replace('.00', '.- ', (string)$item->price) : $item->price }}&euro;</h1>
+                                    <h1>{{$item->title}} | {{ floor($item->price) == $item->price ? str_replace('.00', '.- ', (string)$item->price) : $item->price }}<span class="euro">&euro;</span></h1>
                                     <add-to-cart item-id="{{$item->id}}" item-img="{{$item->main_image}}" item-title="{{$item->title}}" item-price="{{$item->price}}">
                                     </add-to-cart>
                                     <p>{{ $item->description }}</p>
@@ -98,7 +98,7 @@
                             onmouseleave="itemMouseLeave(this)"  
                             onfocus="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})"
                             onfocusout="itemMouseLeave(this)">
-                            <div class="item-img">
+                            <div class="item-img" style="z-index: 1;">
                                 <picture class="cleary-prep">
                                     <source media="(min-width:2100px)" srcset="/storage/{{ $item->main_image }}">
                                     <source media="(min-width:1200px)" srcset="/storage/{{ str_replace('/', '/1000_' , $item->main_image) }}">
@@ -106,7 +106,7 @@
                                 </picture>
                             </div>
                             <div class="details">
-                                <h1>{{$item->title}} | {{ floor($item->price) == $item->price ? str_replace('.00', '.- ', (string)$item->price) : $item->price }}&euro;</h1>
+                                <h1>{{$item->title}}</h1>
                                 <p>{{ $item->description }}</p>
                                 @foreach ($imgs->where('item_id', '=', $item->id) as $img)
                                     <picture>

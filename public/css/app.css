@@ -170,6 +170,10 @@ p {
   margin-top: -80px;
 }
 
+.euro {
+  font-size: 0.7em;
+}
+
 section {
   display: flex;
   position: relative;
@@ -758,6 +762,18 @@ footer .spacer.wave-start.flip {
   --delay: 0s;
   --time: 0.05s;
   transition: opacity var(--time) ease-in var(--delay);
+}
+.details .add-to-cart {
+  display: inline-block;
+  padding: 0.3em 0.5em;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: text-shadow 0.3s ease, opacity var(--time) ease-in var(--delay);
+  background: linear-gradient(145deg, #1c1c1c, #171717);
+  box-shadow: 5px 5px 10px #161616, -5px -5px 10px #1e1e1e;
+}
+.details .add-to-cart:hover {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
 }
 .details img {
   max-width: 0;

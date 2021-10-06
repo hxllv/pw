@@ -218,7 +218,7 @@ window.itemMouseLeave = function(item) {
 
     picture.style.zIndex = 997;
     const time = setTimeout(() => {
-        picture.style.zIndex = 0;
+        picture.style.zIndex = 1;
         clearTimeout(time);
     }, 200);
 

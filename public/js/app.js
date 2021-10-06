@@ -37705,7 +37705,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a", { on: { click: _vm.addToCart } }, [
+  return _c("a", { staticClass: "add-to-cart", on: { click: _vm.addToCart } }, [
     _vm._v("\n    Add to cart\n")
   ])
 }
@@ -50435,7 +50435,7 @@ window.itemMouseLeave = function (item) {
   });
   picture.style.zIndex = 997;
   var time = setTimeout(function () {
-    picture.style.zIndex = 0;
+    picture.style.zIndex = 1;
     clearTimeout(time);
   }, 200);
   items.forEach(function (item) {

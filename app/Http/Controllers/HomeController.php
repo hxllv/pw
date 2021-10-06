@@ -65,4 +65,8 @@ class HomeController extends Controller
 
         return true;
     }
+
+    public function checkout() {
+        return view('checkout');
+    }
 }
