@@ -34,11 +34,7 @@
     </a>
     <div id="app">
         <main>
-            <form action="?" method="POST">
-                <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
-                <br/>
-                <input type="submit" value="Submit">
-            </form>
+            <checkout-form></checkout-form>
         </main>
     </div>      
 </body>

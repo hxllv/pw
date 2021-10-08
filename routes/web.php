@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/', [App\Http\Controllers\HomeController::class, 'mail'])->name('mail');
+
 Route::get('/checkout', [App\Http\Controllers\HomeController::class, 'checkout'])->name('checkout');
+Route::post('/checkout/captcha', [App\Http\Controllers\HomeController::class, 'captcha'])->name('captcha');
 
 Route::group(['prefix' => 'admin'], function() {
     Auth::routes();
