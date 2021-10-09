@@ -173,7 +173,7 @@ p {
 }
 
 .euro {
-    font-size: .7em;
+    font-size: 0.7em;
 }
 
 section {
@@ -766,20 +766,16 @@ footer {
 
     .add-to-cart {
         display: inline-block;
-        padding: .3em .5em;
+        padding: 0.3em 0.5em;
         text-shadow: $white-shadow;
         cursor: pointer;
-        transition: text-shadow 0.3s ease, opacity var(--time) ease-in var(--delay);
+        transition: text-shadow 0.3s ease,
+            opacity var(--time) ease-in var(--delay);
         background: linear-gradient(145deg, #1c1c1c, #171717);
-        box-shadow:  5px 5px 10px #161616,
-             -5px -5px 10px #1e1e1e;
+        box-shadow: 5px 5px 10px #161616, -5px -5px 10px #1e1e1e;
 
         &:hover {
-            text-shadow: 0 0 15px
-            rgba(
-                $color: #fff,
-                $alpha: 0.6
-            );
+            text-shadow: 0 0 15px rgba($color: #fff, $alpha: 0.6);
         }
     }
 
@@ -863,7 +859,7 @@ contact section
 
 .contact-form {
     border-radius: 50px;
-    box-shadow: 20px 20px 41px #00000020, -20px -20px 41px #ffffff50;
+    box-shadow: 20px 20px 41px #bcbcbc, -20px -20px 41px #fefefe;
     padding: 40px;
     margin: 100px auto;
     max-width: 800px;
@@ -892,13 +888,12 @@ contact section
         border-radius: 10px;
         padding: 10px;
         margin: 10px;
-        box-shadow: 7px 7px 13px #00000020, -7px -7px 13px #ffffff50;
+        box-shadow: 7px 7px 13px #bcbcbc, -7px -7px 13px #fefefe;
         @supports (
-            box-shadow: inset 7px 7px 13px #00000020,
-            inset -7px -7px 13px #ffffff50
+            box-shadow: inset 7px 7px 13px #bcbcbc,
+            inset -7px -7px 13px #fefefe
         ) {
-            box-shadow: inset 7px 7px 13px #00000020,
-                inset -7px -7px 13px #ffffff50;
+            box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
         }
         transition: background-color 0.3s ease;
 
@@ -925,7 +920,7 @@ contact section
     button {
         width: auto;
         margin: auto;
-        box-shadow: 7px 7px 13px #00000020, -7px -7px 13px #ffffff50;
+        box-shadow: 7px 7px 13px #bcbcbc, -7px -7px 13px #fefefe;
         transition: background-color 0.3s ease;
 
         &:hover,
@@ -933,8 +928,7 @@ contact section
             width: auto;
             margin: auto;
             background-color: $nav-green-blur;
-            box-shadow: inset 7px 7px 13px #00000020,
-                inset -7px -7px 13px #ffffff50;
+            box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
         }
     }
 }

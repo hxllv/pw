@@ -847,7 +847,7 @@ contact section
 =============*/
 .contact-form {
   border-radius: 50px;
-  box-shadow: 20px 20px 41px #00000020, -20px -20px 41px #ffffff50;
+  box-shadow: 20px 20px 41px #bcbcbc, -20px -20px 41px #fefefe;
   padding: 40px;
   margin: 100px auto;
   max-width: 800px;
@@ -875,16 +875,16 @@ contact section
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
-  box-shadow: 7px 7px 13px #00000020, -7px -7px 13px #ffffff50;
+  box-shadow: 7px 7px 13px #bcbcbc, -7px -7px 13px #fefefe;
   transition: background-color 0.3s ease;
 }
-@supports (box-shadow: inset 7px 7px 13px #00000020, inset -7px -7px 13px #ffffff50) {
+@supports (box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe) {
   .contact-form-input input,
 .contact-form-input textarea,
 .contact-form-input select,
 .contact-form-input button,
 .contact-form-input select {
-    box-shadow: inset 7px 7px 13px #00000020, inset -7px -7px 13px #ffffff50;
+    box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
   }
 }
 .contact-form-input input:focus,
@@ -909,7 +909,7 @@ contact section
 .contact-form-input button {
   width: auto;
   margin: auto;
-  box-shadow: 7px 7px 13px #00000020, -7px -7px 13px #ffffff50;
+  box-shadow: 7px 7px 13px #bcbcbc, -7px -7px 13px #fefefe;
   transition: background-color 0.3s ease;
 }
 .contact-form-input input[type=submit]:hover, .contact-form-input input[type=submit]:focus,
@@ -918,7 +918,7 @@ contact section
   width: auto;
   margin: auto;
   background-color: #1d995f83;
-  box-shadow: inset 7px 7px 13px #00000020, inset -7px -7px 13px #ffffff50;
+  box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
 }
 
 .contact-form-status {

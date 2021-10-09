@@ -10,9 +10,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="{{ asset('js/checkout.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/be4cbb0046.js" crossorigin="anonymous"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

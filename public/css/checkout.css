@@ -1,1 +1,178 @@
+@import url(https://fonts.googleapis.com/css2?family=Pirata+One&family=Roboto:wght@500;900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Yaldevi:wght@500&display=swap);
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+  font-family: "Yaldevi", sans-serif;
+}
 
+body {
+  background: url("/images/bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+@media screen and (min-width: 1000px) {
+  body {
+    background-image: url("/images/bgs-small.jpg");
+  }
+}
+
+#app {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+  padding-bottom: 15vh;
+}
+@media screen and (min-width: 768px) {
+  #app {
+    padding-bottom: 0;
+  }
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  height: 100%;
+  padding: 1em;
+}
+
+.checkout-div {
+  display: flex;
+  background-color: #dddddd;
+  max-width: 620px;
+  min-height: 60vh;
+  padding: 1em;
+  border-radius: 10px;
+  box-shadow: 7px 7px 13px #00000050, -7px -7px 13px #ffffff50;
+}
+@media screen and (min-width: 500px) {
+  .checkout-div {
+    width: 60%;
+  }
+}
+
+form {
+  flex: 1;
+}
+
+h3 {
+  text-align: center;
+  margin: 0;
+  padding-block: 1em;
+}
+
+.form-group {
+  position: relative;
+  min-height: calc(100% - 4em);
+  padding-bottom: 4em;
+}
+
+.form-input {
+  padding-bottom: 10px;
+  margin: auto;
+}
+@media screen and (min-width: 500px) {
+  .form-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.form-input label {
+  margin-inline: 10px;
+  opacity: 0.7;
+  flex-basis: 25%;
+}
+.form-input input,
+.form-input textarea,
+.form-input select,
+.form-input button,
+.form-input a {
+  display: block;
+  border: none;
+  color: #000000b3;
+  background-color: inherit;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 7px 7px 13px #bcbcbc, -7px -7px 13px #fefefe;
+  transition: background-color 0.3s ease;
+}
+@supports (box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe) {
+  .form-input input,
+.form-input textarea,
+.form-input select,
+.form-input button,
+.form-input a {
+    box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
+  }
+}
+.form-input input:focus,
+.form-input textarea:focus,
+.form-input select:focus,
+.form-input button:focus,
+.form-input a:focus {
+  background-color: #1d995f27;
+}
+.form-input textarea {
+  resize: none;
+}
+.form-input a {
+  cursor: pointer;
+}
+.form-input input[type=submit],
+.form-input button,
+.form-input a {
+  width: auto;
+  margin: auto;
+  box-shadow: 7px 7px 13px #bcbcbc, -7px -7px 13px #fefefe;
+  transition: background-color 0.3s ease;
+}
+.form-input input[type=submit]:hover, .form-input input[type=submit]:focus,
+.form-input button:hover,
+.form-input button:focus,
+.form-input a:hover,
+.form-input a:focus {
+  width: auto;
+  margin: auto;
+  background-color: #1d995f27;
+  box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
+}
+
+.form-step {
+  display: flex !important;
+  align-items: center !important;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.logo-link {
+  position: fixed;
+  bottom: -2%;
+  left: -2%;
+  height: 15vh;
+  padding: 0;
+  z-index: 999999999;
+}
+.logo-link img {
+  border-radius: 50%;
+  max-height: 100%;
+  transition: box-shadow 0.3s cubic-bezier(0.55, -1, 0.51, 1.85), transform 0.2s cubic-bezier(0.55, -1, 0.51, 1.85);
+}
+@media screen and (min-width: 768px) {
+  .logo-link {
+    top: 1%;
+    left: 1%;
+  }
+}
+.logo-link:hover img, .logo-link:focus img {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
