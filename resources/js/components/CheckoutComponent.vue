@@ -1,7 +1,7 @@
 <template>
-    <div class="checkout-div">
-        <form method="post" @submit="onSubmit">
-            <div class="form-group" v-if="step <= 0">
+    <form method="post" @submit="onSubmit">
+        <transition name="fade">
+            <div class="checkout-div" v-if="step <= 0">
                 <vue-recaptcha
                     :load-recaptcha-script="true"
                     ref="recaptcha"
@@ -10,7 +10,9 @@
                     sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                 ></vue-recaptcha>
             </div>
-            <div class="form-group" v-if="step === 1">
+        </transition>
+        <transition name="fade">
+            <div class="checkout-div has-step-controls" v-if="step === 1">
                 <h3>Osebni podatki</h3>
                 <div class="form-input">
                     <label for="ime">Ime</label>
@@ -41,34 +43,47 @@
                     <input type="text" name="posta" id="posta" />
                 </div>
                 <div class="form-input form-step">
-                    <a v-on:click="step = 0">
+                    <a v-on:click="decrementStep">
                         Nazaj
                     </a>
-                    <a v-on:click="step = 2">
+                    <a v-on:click="incrementStep">
                         Naprej
                     </a>
                 </div>
             </div>
-            <div class="form-group" v-if="step === 2">
+        </transition>
+        <transition name="fade">
+            <div class="checkout-div has-step-controls" v-if="step === 2">
                 <h3>Način dostave</h3>
                 <div class="form-input">
-                    <input type="radio" name="dostava" id="dostava" disabled checked/>
+                    <input
+                        type="radio"
+                        name="dostava"
+                        id="dostava"
+                        disabled
+                        checked
+                    />
                     <label for="dostava">Pošta Slovenija</label>
                 </div>
                 <h3>Način plačila</h3>
-                 <div class="form-input">
-                    <input type="radio" name="placilo" id="placilo" disabled checked/>
+                <div class="form-input">
+                    <input
+                        type="radio"
+                        name="placilo"
+                        id="placilo"
+                        disabled
+                        checked
+                    />
                     <label for="placilo">Plačilo po povzetju</label>
-
                 </div>
                 <div class="form-input form-step">
-                    <a v-on:click="step = 1">
+                    <a v-on:click="decrementStep">
                         Nazaj
                     </a>
                 </div>
             </div>
-        </form>
-    </div>
+        </transition>
+    </form>
 </template>
 
 <script>
@@ -82,11 +97,25 @@ export default {
         };
     },
     methods: {
+        incrementStep() {
+            this.step += 0.5;
+            const time = setTimeout(() => {
+                this.step += 0.5;
+            }, 500);
+        },
+        decrementStep() {
+            this.step -= 0.5;
+            const time = setTimeout(() => {
+                this.step -= 0.5;
+                clearTimeout(time);
+            }, 500);
+        },
         onCaptchaVerified(token) {
             this.captchaToken = token;
             const time = setTimeout(() => {
                 this.$refs.recaptcha.reset();
-                this.step = 1;
+                this.incrementStep();
+                clearTimeout(time);
             }, 1000);
         },
         onCaptchaExpired() {
@@ -97,3 +126,15 @@ export default {
     components: { VueRecaptcha }
 };
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+.fade-enter,
+.fade-leave-to,
+.fade-leave-active {
+    opacity: 0;
+}
+</style>

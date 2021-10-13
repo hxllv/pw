@@ -42,33 +42,32 @@ main {
 }
 
 .checkout-div {
-    display: flex;
+    flex: 1;
+    position: relative;
     background-color: $white;
-    max-width: 620px;
-    min-height: 60vh;
     padding: 1em;
     border-radius: 10px;
     box-shadow: 7px 7px 13px #00000050, -7px -7px 13px #ffffff50;
+
+    &.has-step-controls {
+        padding-bottom: 5em;
+    }
+}
+
+form {
+    display: flex;
+    max-width: 620px;
+    min-height: 60vh;
 
     @media screen and (min-width: 500px) {
         width: 60%;
     }
 }
 
-form {
-    flex: 1;
-}
-
 h3 {
     text-align: center;
     margin: 0;
     padding-block: 1em;
-}
-
-.form-group {
-    position: relative;
-    min-height: calc(100% - 4em);
-    padding-bottom: 4em;
 }
 
 .form-input {
@@ -143,7 +142,7 @@ h3 {
     display: flex !important;
     align-items: center !important;
     position: absolute;
-    bottom: 0;
+    bottom: 1em;
     left: 0;
     right: 0;
 }
