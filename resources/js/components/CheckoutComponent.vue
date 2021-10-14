@@ -3,12 +3,18 @@
         <transition name="fade">
             <div class="checkout-div" v-if="step <= 0">
                 <vue-recaptcha
+                    v-if="captchaToken === null"
                     :load-recaptcha-script="true"
                     ref="recaptcha"
                     @verify="onCaptchaVerified"
                     @expired="onCaptchaExpired"
                     sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                 ></vue-recaptcha>
+                <div class="form-input form-step">
+                    <a v-on:click="incrementStep">
+                        Naprej
+                    </a>
+                </div>
             </div>
         </transition>
         <transition name="fade">
@@ -16,37 +22,78 @@
                 <h3>Osebni podatki</h3>
                 <div class="form-input">
                     <label for="ime">Ime</label>
-                    <input type="text" name="ime" id="ime" />
+                    <input v-model="ime" type="text" name="ime" id="ime" />
+                    <div class="error-msg" v-if="'ime' in userErr">
+                        {{ userErr.ime[0] }}
+                    </div>
                 </div>
                 <div class="form-input">
                     <label for="priimek">Priimek</label>
-                    <input type="text" name="priimek" id="priimek" />
+                    <input
+                        v-model="priimek"
+                        type="text"
+                        name="priimek"
+                        id="priimek"
+                    />
+                    <div class="error-msg" v-if="'priimek' in userErr">
+                        {{ userErr.priimek[0] }}
+                    </div>
                 </div>
                 <div class="form-input">
                     <label for="email">e-naslov</label>
-                    <input type="email" name="email" id="email" />
+                    <input
+                        v-model="email"
+                        type="email"
+                        name="email"
+                        id="email"
+                    />
+                    <div class="error-msg" v-if="'email' in userErr">
+                        {{ userErr.email[0] }}
+                    </div>
                 </div>
                 <div class="form-input">
                     <label for="tel">Telefonska št.</label>
-                    <input type="tel" name="tel" id="tel" />
+                    <input v-model="tel" type="tel" name="tel" id="tel" />
+                    <div class="error-msg" v-if="'tel' in userErr">
+                        {{ userErr.tel[0] }}
+                    </div>
                 </div>
                 <div class="form-input">
-                    <label for="Naslov">Naslov</label>
-                    <input type="text" name="Naslov" id="Naslov" />
+                    <label for="naslov">Naslov</label>
+                    <input
+                        v-model="naslov"
+                        type="text"
+                        name="naslov"
+                        id="naslov"
+                    />
+                    <div class="error-msg" v-if="'naslov' in userErr">
+                        {{ userErr.naslov[0] }}
+                    </div>
                 </div>
                 <div class="form-input">
                     <label for="kraj">Kraj</label>
-                    <input type="text" name="kraj" id="kraj" />
+                    <input v-model="kraj" type="text" name="kraj" id="kraj" />
+                    <div class="error-msg" v-if="'kraj' in userErr">
+                        {{ userErr.kraj[0] }}
+                    </div>
                 </div>
                 <div class="form-input">
                     <label for="posta">Poštna številka</label>
-                    <input type="text" name="posta" id="posta" />
+                    <input
+                        v-model="posta"
+                        type="text"
+                        name="posta"
+                        id="posta"
+                    />
+                    <div class="error-msg" v-if="'posta' in userErr">
+                        {{ userErr.posta[0] }}
+                    </div>
                 </div>
                 <div class="form-input form-step">
                     <a v-on:click="decrementStep">
                         Nazaj
                     </a>
-                    <a v-on:click="incrementStep">
+                    <a v-on:click="userDataFwd">
                         Naprej
                     </a>
                 </div>
@@ -80,6 +127,9 @@
                     <a v-on:click="decrementStep">
                         Nazaj
                     </a>
+                    <button>
+                        submit
+                    </button>
                 </div>
             </div>
         </transition>
@@ -93,7 +143,14 @@ export default {
         return {
             step: 0,
             captchaToken: null,
-            gcaptchaLoaded: false
+            ime: "",
+            priimek: "",
+            email: "",
+            tel: "",
+            naslov: "",
+            kraj: "",
+            posta: "",
+            userErr: {}
         };
     },
     methods: {
@@ -101,6 +158,7 @@ export default {
             this.step += 0.5;
             const time = setTimeout(() => {
                 this.step += 0.5;
+                clearTimeout(time);
             }, 500);
         },
         decrementStep() {
@@ -110,18 +168,47 @@ export default {
                 clearTimeout(time);
             }, 500);
         },
+        userDataFwd() {
+            axios
+                .post("/checkout/userdata", {
+                    ime: this.ime,
+                    priimek: this.priimek,
+                    email: this.email,
+                    tel: this.tel,
+                    naslov: this.naslov,
+                    kraj: this.kraj,
+                    posta: this.posta
+                })
+                .then(response => {
+                    this.userErr = {};
+                    if ("error" in response.data)
+                        return (this.userErr = response.data.error);
+                    this.incrementStep();
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
         onCaptchaVerified(token) {
-            this.captchaToken = token;
             const time = setTimeout(() => {
                 this.$refs.recaptcha.reset();
-                this.incrementStep();
+                this.captchaToken = token;
                 clearTimeout(time);
             }, 1000);
         },
         onCaptchaExpired() {
             this.$refs.recaptcha.reset();
         },
-        onSubmit() {}
+        onSubmit(e) {
+            e.preventDefault();
+            axios
+                .post("/checkout/captcha", {
+                    token: this.captchaToken
+                })
+                .then(response => {
+                    console.log(response.data);
+                });
+        }
     },
     components: { VueRecaptcha }
 };

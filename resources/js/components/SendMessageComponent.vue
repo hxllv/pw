@@ -92,11 +92,11 @@ export default {
                         ".contact-form-status"
                     );
 
-                    contactStatus.classList.remove("success");
+                    contactStatus.classList.remove("nonfail");
                     contactStatus.classList.remove("fail");
 
-                    if (response.data) {
-                        contactStatus.classList.add("success");
+                    if (response.data[0]) {
+                        contactStatus.classList.add("nonfail");
                         contactStatus.innerHTML = "&#10003;";
                     } else {
                         contactStatus.classList.add("fail");
@@ -111,6 +111,9 @@ export default {
                     }, 3000);
                 })
                 .catch(response => {
+                    contactStatus.classList.remove("nonfail");
+                    contactStatus.classList.remove("fail");
+
                     contactSubmit.classList.remove("show");
                     const contactStatus = document.querySelector(
                         ".contact-form-status"

@@ -73,6 +73,7 @@ h3 {
 .form-input {
   padding-bottom: 10px;
   margin: auto;
+  flex-wrap: wrap;
 }
 @media screen and (min-width: 500px) {
   .form-input {
@@ -86,7 +87,7 @@ h3 {
   opacity: 0.7;
   flex-basis: 25%;
 }
-.form-input input,
+.form-input input:not([type=radio]),
 .form-input textarea,
 .form-input select,
 .form-input button,
@@ -102,7 +103,7 @@ h3 {
   transition: background-color 0.3s ease;
 }
 @supports (box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe) {
-  .form-input input,
+  .form-input input:not([type=radio]),
 .form-input textarea,
 .form-input select,
 .form-input button,
@@ -110,7 +111,7 @@ h3 {
     box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
   }
 }
-.form-input input:focus,
+.form-input input:not([type=radio]):focus,
 .form-input textarea:focus,
 .form-input select:focus,
 .form-input button:focus,
@@ -149,6 +150,13 @@ h3 {
   bottom: 1em;
   left: 0;
   right: 0;
+}
+
+.error-msg {
+  flex-basis: 100%;
+  text-align: center;
+  color: #dc3545;
+  font-size: 0.8rem;
 }
 
 .logo-link {

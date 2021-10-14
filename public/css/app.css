@@ -931,7 +931,7 @@ contact section
   transition: transform 0.3s ease;
   font-weight: bold;
 }
-.contact-form-status.success {
+.contact-form-status.nonfail {
   color: #198754;
 }
 .contact-form-status.fail {

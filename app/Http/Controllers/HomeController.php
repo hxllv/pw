@@ -9,7 +9,6 @@ use App\Mail\MessageMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cache;
-use Zttp\Zttp;
 
 class HomeController extends Controller
 {
@@ -47,8 +46,6 @@ class HomeController extends Controller
 
     public function mail()
     {
-        /* dd(request()); */
-
         $data = request()->validate([
             'ime' => 'required|string',
             'priimek' => 'required|string',
@@ -61,21 +58,11 @@ class HomeController extends Controller
         Mail::to("nace.tavcer20@gmail.com")->send(new MessageMail($data));
 
         if(count(Mail::failures()) > 0){
-            return false;
+            return response()->json([false]);
         }
 
-        return true;
+        return response()->json([true]);
     }
 
-    public function checkout() {
-        return view('checkout');
-    }
-
-    public function captcha() {
-        return Zttp::asFormParams()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => "6LfYy7IcAAAAAODUQ8HhbRVp0m-Ss1WdGIGqGMUW",
-            'response' => request('token'),
-            'remoteip' => request()->ip()
-        ])->json()['success'];
-    }
+    
 }
