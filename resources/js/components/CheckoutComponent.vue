@@ -97,6 +97,11 @@
                         Naprej
                     </a>
                 </div>
+                <div class="load-overlay" v-if="loadingUser">
+                    <span class="span-dot-1">.</span>
+                    <span class="span-dot-2">.</span>
+                    <span class="span-dot-3">.</span>
+                </div>
             </div>
         </transition>
         <transition name="fade">
@@ -150,7 +155,8 @@ export default {
             naslov: "",
             kraj: "",
             posta: "",
-            userErr: {}
+            userErr: {},
+            loadingUser: false
         };
     },
     methods: {
@@ -169,6 +175,7 @@ export default {
             }, 500);
         },
         userDataFwd() {
+            this.loadingUser = true;
             axios
                 .post("/checkout/userdata", {
                     ime: this.ime,
@@ -180,6 +187,7 @@ export default {
                     posta: this.posta
                 })
                 .then(response => {
+                    this.loadingUser = false;
                     this.userErr = {};
                     if ("error" in response.data)
                         return (this.userErr = response.data.error);
