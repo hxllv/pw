@@ -18,14 +18,9 @@
                         X
                     </a>
                 </div>
-                <vue-recaptcha
-                    v-if="captchaToken === null"
-                    :load-recaptcha-script="true"
-                    ref="recaptcha"
-                    @verify="onCaptchaVerified"
-                    @expired="onCaptchaExpired"
-                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                ></vue-recaptcha>
+                <div class="error-msg" v-if="'items' in itemErr">
+                    {{ itemErr.items }}
+                </div>
                 <div class="form-input form-step">
                     <a v-on:click="itemsFwd">
                         Naprej
@@ -153,9 +148,31 @@
                     <a v-on:click="decrementStep">
                         Nazaj
                     </a>
-                    <button>
-                        submit
-                    </button>
+                    <a v-on:click="incrementStep">
+                        Pregled
+                    </a>
+                </div>
+            </div>
+        </transition>
+        <transition name="fade">
+            <div class="checkout-div has-step-controls" v-if="step === 3">
+                <h3>Pregled naročila</h3>
+                <div class="form-input form-has-recaptcha">
+                    <div class="form-recaptcha">
+                        <vue-recaptcha
+                            :load-recaptcha-script="true"
+                            ref="recaptcha"
+                            @verify="onCaptchaVerified"
+                            @expired="onCaptchaExpired"
+                            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                        ></vue-recaptcha>
+                    </div>
+                </div>
+                <div class="form-input form-step">
+                    <a v-on:click="decrementStep">
+                        Nazaj
+                    </a>
+                    <input type="submit" value="Naroči" />
                 </div>
             </div>
         </transition>
@@ -167,8 +184,9 @@ import VueRecaptcha from "vue-recaptcha";
 export default {
     data() {
         return {
-            step: 0,
+            step: 3,
             captchaToken: null,
+            userErr: {},
             ime: "",
             priimek: "",
             email: "",
@@ -176,8 +194,8 @@ export default {
             naslov: "",
             kraj: "",
             posta: "",
-            userErr: {},
             loading: false,
+            itemErr: {},
             cartItems: JSON.parse(localStorage.cart)
         };
     },
@@ -204,7 +222,14 @@ export default {
                 })
                 .then(response => {
                     this.loading = false;
-                    console.log(response.data);
+                    this.itemErr = {};
+                    if (response.data && "error" in response.data)
+                        return (this.itemErr = response.data.error);
+                    this.incrementStep();
+                })
+                .catch(e => {
+                    this.loading = false;
+                    console.log(e);
                 });
         },
         userDataFwd() {
@@ -222,17 +247,17 @@ export default {
                 .then(response => {
                     this.loading = false;
                     this.userErr = {};
-                    if ("error" in response.data)
+                    if (response.data && "error" in response.data)
                         return (this.userErr = response.data.error);
                     this.incrementStep();
                 })
                 .catch(e => {
+                    this.loading = false;
                     console.log(e);
                 });
         },
         onCaptchaVerified(token) {
             const time = setTimeout(() => {
-                this.$refs.recaptcha.reset();
                 this.captchaToken = token;
                 clearTimeout(time);
             }, 1000);
@@ -242,6 +267,7 @@ export default {
         },
         onSubmit(e) {
             e.preventDefault();
+            this.$refs.recaptcha.reset();
             axios
                 .post("/checkout/captcha", {
                     token: this.captchaToken
@@ -253,8 +279,13 @@ export default {
         removeItemFromCart(id) {
             let cart = JSON.parse(window.localStorage.cart);
             delete cart[id];
-            window.localStorage.setItem("cart", JSON.stringify(cart));
+            window.localStorage.cart = JSON.stringify(cart);
             this.cartItems = cart;
+        }
+    },
+    watch: {
+        step: function() {
+            if (this.$refs.recaptcha) this.$refs.recaptcha.reset();
         }
     },
     components: { VueRecaptcha }

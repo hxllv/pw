@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 
 class CheckoutController extends Controller
 {
@@ -31,27 +33,27 @@ class CheckoutController extends Controller
             'items' => 'required|json'
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails())
             return response()->json(['error' => ['items' => 'Poslani podatki niso v obliki JSON, obrnite se na skrbnika spletne strani.']]);
-        }
 
         $data = json_decode(request()->all()['items'], true);
 
-        foreach ($data as $key => $item) {
+        if (count($data) === 0)
+            return response()->json(['error' => ['items' => 'V košarici ni izdelkov.']]);
+
+        $items = [];
+        foreach ($data as $key => $itemNotUsed) {
             $item = Item::find($key);
 
-            $validator = Validator::make($data, [
-                '*.price' => ['string', 'required', function ($attribute, $value, $fail) use ($item) {
-                    if ($value !== $item->price) {
-                        $fail('The ' . $attribute . ' is invalid.');
-                    }
-                }]
-            ]);
+            if ($item === null)
+                return response()->json(['error' => ['items' => 'Izdelek v košarici ima neveljaven ID, obrnite se na skrbnika spletne strani.']]);
 
-            if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()]);
-            }
+            $items[$key] = $item;
         }
+
+        $_SESSION['items'] = $items;
+
+        return;
     }
 
     public function checkUserData()
@@ -71,7 +73,8 @@ class CheckoutController extends Controller
         }
 
         $data = request()->all();
+        $_SESSION['userData'] = $data;
 
-        return response()->json($data);
+        return;
     }
 }

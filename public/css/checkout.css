@@ -55,6 +55,7 @@ main {
 
 form {
   display: flex;
+  width: 90%;
   max-width: 620px;
   min-height: 60vh;
 }
@@ -72,6 +73,7 @@ h3 {
 
 .form-input {
   padding-bottom: 10px;
+  position: relative;
   margin: auto;
   flex-wrap: wrap;
 }
@@ -100,6 +102,8 @@ h3 {
   padding: 10px;
   margin: 10px;
   box-shadow: 7px 7px 13px #bcbcbc, -7px -7px 13px #fefefe;
+  font-family: "Yaldevi", sans-serif;
+  font-size: 1rem;
   transition: background-color 0.3s ease;
 }
 @supports (box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe) {
@@ -121,9 +125,6 @@ h3 {
 .form-input textarea {
   resize: none;
 }
-.form-input a {
-  cursor: pointer;
-}
 .form-input input[type=submit],
 .form-input button,
 .form-input a {
@@ -131,6 +132,7 @@ h3 {
   margin: auto;
   box-shadow: 7px 7px 13px #bcbcbc, -7px -7px 13px #fefefe;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 .form-input input[type=submit]:hover, .form-input input[type=submit]:focus,
 .form-input button:hover,
@@ -150,6 +152,24 @@ h3 {
   bottom: 1em;
   left: 0;
   right: 0;
+}
+
+.form-has-recaptcha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-recaptcha {
+  position: absolute;
+  top: 0;
+  transform: scale(0.75);
+  transform-origin: center;
+}
+@media screen and (min-width: 620px) {
+  .form-recaptcha {
+    transform: none;
+  }
 }
 
 @-webkit-keyframes jumpy-dot {
@@ -208,10 +228,25 @@ h3 {
 }
 
 .cart-item {
+  position: relative;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   margin: 0.5em 0;
+}
+.cart-item a, .cart-item-text,
+.cart-item img {
+  margin: 0.5em 0;
+}
+.cart-item a, .cart-item-text {
+  flex-basis: 50%;
+  text-align: center;
+}
+@media screen and (min-width: 500px) {
+  .cart-item a, .cart-item-text {
+    flex-basis: auto;
+  }
 }
 .cart-item a {
   color: #dc3545;
@@ -224,6 +259,17 @@ h3 {
 }
 .cart-item img {
   max-height: 60px;
+}
+
+.cart-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 40px;
 }
 
 .error-msg {
