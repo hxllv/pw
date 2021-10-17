@@ -10,7 +10,7 @@ export default {
     methods: {
         addToCart() {
             const self = this._props;
-            let cart = JSON.parse(window.localStorage.getItem("cart"));
+            let cart = JSON.parse(window.localStorage.cart);
             console.log(self.itemImg);
 
             cart[self.itemId] = {

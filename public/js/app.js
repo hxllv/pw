@@ -2076,7 +2076,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     addToCart: function addToCart() {
       var self = this._props;
-      var cart = JSON.parse(window.localStorage.getItem("cart"));
+      var cart = JSON.parse(window.localStorage.cart);
       console.log(self.itemImg);
       cart[self.itemId] = {
         img: self.itemImg.replace("/", "/500_"),
@@ -2263,15 +2263,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      cartItems: JSON.parse(window.localStorage.getItem("cart"))
+      cartItems: JSON.parse(window.localStorage.cart)
     };
   },
   methods: {
     openCart: function openCart() {
-      this.cartItems = JSON.parse(window.localStorage.getItem("cart"));
+      this.cartItems = JSON.parse(window.localStorage.cart);
     },
     removeItemFromCart: function removeItemFromCart(id) {
-      var cart = JSON.parse(window.localStorage.getItem("cart"));
+      var cart = JSON.parse(window.localStorage.cart);
       delete cart[id];
       window.localStorage.setItem("cart", JSON.stringify(cart));
       this.cartItems = cart;

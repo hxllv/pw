@@ -2209,6 +2209,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2223,7 +2244,8 @@ __webpack_require__.r(__webpack_exports__);
       kraj: "",
       posta: "",
       userErr: {},
-      loadingUser: false
+      loading: false,
+      cartItems: JSON.parse(localStorage.cart)
     };
   },
   methods: {
@@ -2245,10 +2267,21 @@ __webpack_require__.r(__webpack_exports__);
         clearTimeout(time);
       }, 500);
     },
-    userDataFwd: function userDataFwd() {
+    itemsFwd: function itemsFwd() {
       var _this3 = this;
 
-      this.loadingUser = true;
+      this.loading = true;
+      axios.post("/checkout/items", {
+        items: JSON.stringify(this.cartItems)
+      }).then(function (response) {
+        _this3.loading = false;
+        console.log(response.data);
+      });
+    },
+    userDataFwd: function userDataFwd() {
+      var _this4 = this;
+
+      this.loading = true;
       axios.post("/checkout/userdata", {
         ime: this.ime,
         priimek: this.priimek,
@@ -2258,22 +2291,22 @@ __webpack_require__.r(__webpack_exports__);
         kraj: this.kraj,
         posta: this.posta
       }).then(function (response) {
-        _this3.loadingUser = false;
-        _this3.userErr = {};
-        if ("error" in response.data) return _this3.userErr = response.data.error;
+        _this4.loading = false;
+        _this4.userErr = {};
+        if ("error" in response.data) return _this4.userErr = response.data.error;
 
-        _this3.incrementStep();
+        _this4.incrementStep();
       })["catch"](function (e) {
         console.log(e);
       });
     },
     onCaptchaVerified: function onCaptchaVerified(token) {
-      var _this4 = this;
+      var _this5 = this;
 
       var time = setTimeout(function () {
-        _this4.$refs.recaptcha.reset();
+        _this5.$refs.recaptcha.reset();
 
-        _this4.captchaToken = token;
+        _this5.captchaToken = token;
         clearTimeout(time);
       }, 1000);
     },
@@ -2287,6 +2320,12 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log(response.data);
       });
+    },
+    removeItemFromCart: function removeItemFromCart(id) {
+      var cart = JSON.parse(window.localStorage.cart);
+      delete cart[id];
+      window.localStorage.setItem("cart", JSON.stringify(cart));
+      this.cartItems = cart;
     }
   },
   components: {
@@ -38232,6 +38271,40 @@ var render = function() {
               "div",
               { staticClass: "checkout-div" },
               [
+                _vm._l(_vm.cartItems, function(item, id) {
+                  return _c("div", { key: id, staticClass: "cart-item" }, [
+                    _c("img", { attrs: { src: "/storage/" + item.img } }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "cart-item-text" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(item.title) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "cart-item-text" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(item.price) +
+                          " €\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.removeItemFromCart(id)
+                          }
+                        }
+                      },
+                      [_vm._v("\n                    X\n                ")]
+                    )
+                  ])
+                }),
+                _vm._v(" "),
                 _vm.captchaToken === null
                   ? _c("vue-recaptcha", {
                       ref: "recaptcha",
@@ -38247,12 +38320,22 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-input form-step" }, [
-                  _c("a", { on: { click: _vm.incrementStep } }, [
+                  _c("a", { on: { click: _vm.itemsFwd } }, [
                     _vm._v("\n                    Naprej\n                ")
                   ])
-                ])
+                ]),
+                _vm._v(" "),
+                _vm.loading
+                  ? _c("div", { staticClass: "load-overlay" }, [
+                      _c("span", { staticClass: "span-dot-1" }, [_vm._v(".")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "span-dot-2" }, [_vm._v(".")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "span-dot-3" }, [_vm._v(".")])
+                    ])
+                  : _vm._e()
               ],
-              1
+              2
             )
           : _vm._e()
       ]),
@@ -38521,7 +38604,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm.loadingUser
+              _vm.loading
                 ? _c("div", { staticClass: "load-overlay" }, [
                     _c("span", { staticClass: "span-dot-1" }, [_vm._v(".")]),
                     _vm._v(" "),

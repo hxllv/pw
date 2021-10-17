@@ -190,6 +190,28 @@ h3 {
     }
 }
 
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5em 0;
+
+    a {
+        color: #dc3545;
+        text-shadow: $black-shadow;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    &-text {
+        text-shadow: $white-shadow;
+    }
+
+    img {
+        max-height: 60px;
+    }
+}
+
 .error-msg {
     flex-basis: 100%;
     text-align: center;

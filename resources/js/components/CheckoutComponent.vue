@@ -2,6 +2,22 @@
     <form method="post" @submit="onSubmit">
         <transition name="fade">
             <div class="checkout-div" v-if="step <= 0">
+                <div
+                    class="cart-item"
+                    v-for="(item, id) in cartItems"
+                    :key="id"
+                >
+                    <img :src="`/storage/${item.img}`" />
+                    <span class="cart-item-text">
+                        {{ item.title }}
+                    </span>
+                    <span class="cart-item-text">
+                        {{ item.price }} &euro;
+                    </span>
+                    <a v-on:click="removeItemFromCart(id)">
+                        X
+                    </a>
+                </div>
                 <vue-recaptcha
                     v-if="captchaToken === null"
                     :load-recaptcha-script="true"
@@ -11,9 +27,14 @@
                     sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                 ></vue-recaptcha>
                 <div class="form-input form-step">
-                    <a v-on:click="incrementStep">
+                    <a v-on:click="itemsFwd">
                         Naprej
                     </a>
+                </div>
+                <div class="load-overlay" v-if="loading">
+                    <span class="span-dot-1">.</span>
+                    <span class="span-dot-2">.</span>
+                    <span class="span-dot-3">.</span>
                 </div>
             </div>
         </transition>
@@ -97,7 +118,7 @@
                         Naprej
                     </a>
                 </div>
-                <div class="load-overlay" v-if="loadingUser">
+                <div class="load-overlay" v-if="loading">
                     <span class="span-dot-1">.</span>
                     <span class="span-dot-2">.</span>
                     <span class="span-dot-3">.</span>
@@ -156,7 +177,8 @@ export default {
             kraj: "",
             posta: "",
             userErr: {},
-            loadingUser: false
+            loading: false,
+            cartItems: JSON.parse(localStorage.cart)
         };
     },
     methods: {
@@ -174,8 +196,19 @@ export default {
                 clearTimeout(time);
             }, 500);
         },
+        itemsFwd() {
+            this.loading = true;
+            axios
+                .post("/checkout/items", {
+                    items: JSON.stringify(this.cartItems)
+                })
+                .then(response => {
+                    this.loading = false;
+                    console.log(response.data);
+                });
+        },
         userDataFwd() {
-            this.loadingUser = true;
+            this.loading = true;
             axios
                 .post("/checkout/userdata", {
                     ime: this.ime,
@@ -187,7 +220,7 @@ export default {
                     posta: this.posta
                 })
                 .then(response => {
-                    this.loadingUser = false;
+                    this.loading = false;
                     this.userErr = {};
                     if ("error" in response.data)
                         return (this.userErr = response.data.error);
@@ -216,6 +249,12 @@ export default {
                 .then(response => {
                     console.log(response.data);
                 });
+        },
+        removeItemFromCart(id) {
+            let cart = JSON.parse(window.localStorage.cart);
+            delete cart[id];
+            window.localStorage.setItem("cart", JSON.stringify(cart));
+            this.cartItems = cart;
         }
     },
     components: { VueRecaptcha }

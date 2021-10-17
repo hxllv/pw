@@ -34,15 +34,15 @@
 export default {
     data() {
         return {
-            cartItems: JSON.parse(window.localStorage.getItem("cart"))
+            cartItems: JSON.parse(window.localStorage.cart)
         };
     },
     methods: {
         openCart() {
-            this.cartItems = JSON.parse(window.localStorage.getItem("cart"));
+            this.cartItems = JSON.parse(window.localStorage.cart);
         },
         removeItemFromCart(id) {
-            let cart = JSON.parse(window.localStorage.getItem("cart"));
+            let cart = JSON.parse(window.localStorage.cart);
             delete cart[id];
             window.localStorage.setItem("cart", JSON.stringify(cart));
             this.cartItems = cart;

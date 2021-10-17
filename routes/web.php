@@ -20,13 +20,14 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::post('/', [App\Http\Controllers\HomeController::class, 'mail'])->name('mail');
 
 Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout/items', [App\Http\Controllers\CheckoutController::class, 'checkItems']);
 Route::post('/checkout/userdata', [App\Http\Controllers\CheckoutController::class, 'checkUserData']);
 Route::post('/checkout/captcha', [App\Http\Controllers\CheckoutController::class, 'captcha'])->name('captcha');
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin'], function () {
     Auth::routes();
 
-    Route::get('/', function() {
+    Route::get('/', function () {
         return redirect('/admin/index');
     });
 
