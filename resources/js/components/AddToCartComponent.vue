@@ -1,6 +1,6 @@
 <template>
     <a class="add-to-cart" v-on:click="addToCart">
-        Add to cart
+        V voziček
     </a>
 </template>
 
@@ -19,7 +19,7 @@ export default {
                 price: self.itemPrice
             };
 
-            window.localStorage.setItem("cart", JSON.stringify(cart));
+            window.localStorage.cart = JSON.stringify(cart);
         }
     }
 };

@@ -771,11 +771,14 @@ footer {
         cursor: pointer;
         transition: text-shadow 0.3s ease,
             opacity var(--time) ease-in var(--delay);
-        background: linear-gradient(145deg, #1c1c1c, #171717);
-        box-shadow: 5px 5px 10px #161616, -5px -5px 10px #1e1e1e;
+        background: #1a1a1a;
+        box-shadow: 6px 6px 12px #0a0a0a, -6px -6px 12px #2a2a2a;
+        border-radius: 10px;
 
         &:hover {
-            text-shadow: 0 0 15px rgba($color: #fff, $alpha: 0.6);
+            text-shadow: 0 0 15px rgba($color: #fff, $alpha: 0.8);
+            background: #1a1a1a;
+            box-shadow: inset 6px 6px 12px #0a0a0a, inset -6px -6px 12px #2a2a2a;
         }
     }
 

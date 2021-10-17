@@ -21,7 +21,7 @@
             </div>
             <a
                 class="cart-checkout"
-                href=""
+                href="/checkout"
                 v-if="this.cartItems && Object.keys(this.cartItems).length"
             >
                 Checkout
@@ -44,7 +44,7 @@ export default {
         removeItemFromCart(id) {
             let cart = JSON.parse(window.localStorage.cart);
             delete cart[id];
-            window.localStorage.setItem("cart", JSON.stringify(cart));
+            window.localStorage.cart = JSON.stringify(cart);
             this.cartItems = cart;
         }
     }
