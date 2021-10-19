@@ -53,19 +53,30 @@ main {
   padding-bottom: 5em;
 }
 
+.checkout-final {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.checkout-final p {
+  text-align: center;
+}
+
 form {
   display: flex;
   width: 90%;
   max-width: 620px;
   min-height: 60vh;
 }
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 768px) {
   form {
     width: 60%;
   }
 }
 
-h3 {
+h3,
+h2 {
   text-align: center;
   margin: 0;
   padding-block: 1em;
@@ -76,18 +87,22 @@ h3 {
   position: relative;
   margin: auto;
   flex-wrap: wrap;
-}
-@media screen and (min-width: 500px) {
-  .form-input {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .form-input label {
   margin-inline: 10px;
   opacity: 0.7;
   flex-basis: 25%;
+}
+.form-input label.user-data {
+  flex-basis: 100%;
+}
+@media screen and (min-width: 455px) {
+  .form-input label.user-data {
+    flex-basis: 25%;
+  }
 }
 .form-input input:not([type=radio]),
 .form-input textarea,
@@ -144,6 +159,12 @@ h3 {
   background-color: #1d995f27;
   box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
 }
+.form-input input[type=submit][disabled],
+.form-input button[disabled],
+.form-input a[disabled] {
+  background: #ababab;
+  box-shadow: 7px 7px 13px #919191, -7px -7px 13px #c5c5c5;
+}
 
 .form-step {
   display: flex !important;
@@ -155,6 +176,7 @@ h3 {
 }
 
 .form-has-recaptcha {
+  height: 78px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,10 +185,10 @@ h3 {
 .form-recaptcha {
   position: absolute;
   top: 0;
-  transform: scale(0.75);
+  transform: scale(0.77);
   transform-origin: center;
 }
-@media screen and (min-width: 620px) {
+@media screen and (min-width: 768px) {
   .form-recaptcha {
     transform: none;
   }
@@ -243,7 +265,7 @@ h3 {
   flex-basis: 50%;
   text-align: center;
 }
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 512px) {
   .cart-item a, .cart-item-text {
     flex-basis: auto;
   }
@@ -270,6 +292,28 @@ h3 {
   height: 2px;
   background-color: rgba(0, 0, 0, 0.15);
   border-radius: 40px;
+}
+
+.overview-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0;
+}
+.overview-data-row {
+  display: flex;
+  width: 80%;
+  padding: 0.5em 0;
+  border-radius: 5px;
+}
+.overview-data-row span {
+  flex-basis: 50%;
+  align-self: center;
+  padding: 0 1em;
+}
+.overview-data-row:nth-child(odd) {
+  background-color: #d3d3d3;
 }
 
 .error-msg {

@@ -2027,23 +2027,89 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      step: 3,
+      step: 0,
       captchaToken: null,
       userErr: {},
-      ime: "",
-      priimek: "",
-      email: "",
-      tel: "",
-      naslov: "",
-      kraj: "",
-      posta: "",
+      userDataFinal: {},
+      ime: "Nace",
+      priimek: "Tavčer",
+      email: "nt@gmail.si",
+      tel: "123123123",
+      naslov: "Dol vas 22",
+      kraj: "Petold",
+      posta: "1523",
       loading: false,
       itemErr: {},
-      cartItems: JSON.parse(localStorage.cart)
+      cartItems: JSON.parse(localStorage.cart),
+      cartItemsFinal: {},
+      price: 0
     };
   },
   methods: {
@@ -2075,6 +2141,8 @@ __webpack_require__.r(__webpack_exports__);
         _this3.loading = false;
         _this3.itemErr = {};
         if (response.data && "error" in response.data) return _this3.itemErr = response.data.error;
+        _this3.cartItemsFinal = response.data.items;
+        _this3.price = response.data.price;
 
         _this3.incrementStep();
       })["catch"](function (e) {
@@ -2098,6 +2166,7 @@ __webpack_require__.r(__webpack_exports__);
         _this4.loading = false;
         _this4.userErr = {};
         if (response.data && "error" in response.data) return _this4.userErr = response.data.error;
+        _this4.userDataFinal = response.data.data;
 
         _this4.incrementStep();
       })["catch"](function (e) {
@@ -2106,23 +2175,30 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onCaptchaVerified: function onCaptchaVerified(token) {
-      var _this5 = this;
-
-      var time = setTimeout(function () {
-        _this5.captchaToken = token;
-        clearTimeout(time);
-      }, 1000);
+      this.captchaToken = token;
+      this.$refs.formSubmit.disabled = false;
     },
     onCaptchaExpired: function onCaptchaExpired() {
       this.$refs.recaptcha.reset();
     },
     onSubmit: function onSubmit(e) {
+      var _this5 = this;
+
       e.preventDefault();
-      this.$refs.recaptcha.reset();
+      this.loading = true;
       axios.post("/checkout/captcha", {
         token: this.captchaToken
       }).then(function (response) {
-        console.log(response.data);
+        _this5.loading = false;
+
+        _this5.$refs.recaptcha.reset();
+
+        if (response.data.success) {
+          _this5.incrementStep();
+        }
+      })["catch"](function (e) {
+        _this5.loading = false;
+        console.log(e);
       });
     },
     removeItemFromCart: function removeItemFromCart(id) {
@@ -38151,7 +38227,11 @@ var render = function() {
               _c("h3", [_vm._v("Osebni podatki")]),
               _vm._v(" "),
               _c("div", { staticClass: "form-input" }, [
-                _c("label", { attrs: { for: "ime" } }, [_vm._v("Ime")]),
+                _c(
+                  "label",
+                  { staticClass: "user-data", attrs: { for: "ime" } },
+                  [_vm._v("Ime")]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38186,7 +38266,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-input" }, [
-                _c("label", { attrs: { for: "priimek" } }, [_vm._v("Priimek")]),
+                _c(
+                  "label",
+                  { staticClass: "user-data", attrs: { for: "priimek" } },
+                  [_vm._v("Priimek")]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38221,7 +38305,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-input" }, [
-                _c("label", { attrs: { for: "email" } }, [_vm._v("e-naslov")]),
+                _c(
+                  "label",
+                  { staticClass: "user-data", attrs: { for: "email" } },
+                  [_vm._v("e-naslov")]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38256,9 +38344,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-input" }, [
-                _c("label", { attrs: { for: "tel" } }, [
-                  _vm._v("Telefonska št.")
-                ]),
+                _c(
+                  "label",
+                  { staticClass: "user-data", attrs: { for: "tel" } },
+                  [_vm._v("Telefonska št.")]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38293,7 +38383,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-input" }, [
-                _c("label", { attrs: { for: "naslov" } }, [_vm._v("Naslov")]),
+                _c(
+                  "label",
+                  { staticClass: "user-data", attrs: { for: "naslov" } },
+                  [_vm._v("Naslov")]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38328,7 +38422,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-input" }, [
-                _c("label", { attrs: { for: "kraj" } }, [_vm._v("Kraj")]),
+                _c(
+                  "label",
+                  { staticClass: "user-data", attrs: { for: "kraj" } },
+                  [_vm._v("Kraj")]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38363,9 +38461,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-input" }, [
-                _c("label", { attrs: { for: "posta" } }, [
-                  _vm._v("Poštna številka")
-                ]),
+                _c(
+                  "label",
+                  { staticClass: "user-data", attrs: { for: "posta" } },
+                  [_vm._v("Poštna številka")]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38476,36 +38576,156 @@ var render = function() {
       _vm._v(" "),
       _c("transition", { attrs: { name: "fade" } }, [
         _vm.step === 3
-          ? _c("div", { staticClass: "checkout-div has-step-controls" }, [
-              _c("h3", [_vm._v("Pregled naročila")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-input form-has-recaptcha" }, [
+          ? _c(
+              "div",
+              { staticClass: "checkout-div has-step-controls" },
+              [
+                _c("h3", [_vm._v("Pregled naročila")]),
+                _vm._v(" "),
+                _vm._l(_vm.cartItemsFinal, function(item, id) {
+                  return _c("div", { key: id, staticClass: "cart-item" }, [
+                    _c("img", {
+                      attrs: { src: "/storage/" + item.main_image }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "cart-item-text" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(item.title) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "cart-item-text" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(item.price) +
+                          " €\n                "
+                      )
+                    ])
+                  ])
+                }),
+                _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "form-recaptcha" },
+                  {
+                    staticStyle: {
+                      "text-align": "center",
+                      "font-size": "1.6rem"
+                    }
+                  },
                   [
-                    _c("vue-recaptcha", {
-                      ref: "recaptcha",
-                      attrs: {
-                        "load-recaptcha-script": true,
-                        sitekey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                      },
-                      on: {
-                        verify: _vm.onCaptchaVerified,
-                        expired: _vm.onCaptchaExpired
-                      }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-input form-step" }, [
-                _c("a", { on: { click: _vm.decrementStep } }, [
-                  _vm._v("\n                    Nazaj\n                ")
+                    _vm._v(
+                      "\n                Skupaj: " +
+                        _vm._s(_vm.price) +
+                        " €\n            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "overview-data" }, [
+                  _c("div", { staticClass: "overview-data-row" }, [
+                    _c("span", [_vm._v("Ime:")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.userDataFinal.ime))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "overview-data-row" }, [
+                    _c("span", [_vm._v("Priimek:")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.userDataFinal.priimek))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "overview-data-row" }, [
+                    _c("span", [_vm._v("e-naslov:")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.userDataFinal.email))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "overview-data-row" }, [
+                    _c("span", [_vm._v("Telefonska št.:")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.userDataFinal.tel))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "overview-data-row" }, [
+                    _c("span", [_vm._v("Naslov:")]),
+                    _c("span", [_vm._v(_vm._s(_vm.userDataFinal.naslov))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "overview-data-row" }, [
+                    _c("span", [_vm._v("Kraj:")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.userDataFinal.kraj))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "overview-data-row" }, [
+                    _c("span", [_vm._v("Poštna št.:")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.userDataFinal.posta))])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("input", { attrs: { type: "submit", value: "Naroči" } })
+                _c("div", { staticClass: "form-input form-has-recaptcha" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-recaptcha" },
+                    [
+                      _c("vue-recaptcha", {
+                        ref: "recaptcha",
+                        attrs: {
+                          "load-recaptcha-script": true,
+                          sitekey: "6LfYy7IcAAAAADHJIeDTvhU1XPnhR0LIclRJ5F2t"
+                        },
+                        on: {
+                          verify: _vm.onCaptchaVerified,
+                          expired: _vm.onCaptchaExpired
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-input form-step" }, [
+                  _c("a", { on: { click: _vm.decrementStep } }, [
+                    _vm._v("\n                    Nazaj\n                ")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "formSubmit",
+                    attrs: { type: "submit", value: "Naroči" }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm.loading
+                  ? _c("div", { staticClass: "load-overlay" }, [
+                      _c("span", { staticClass: "span-dot-1" }, [_vm._v(".")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "span-dot-2" }, [_vm._v(".")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "span-dot-3" }, [_vm._v(".")])
+                    ])
+                  : _vm._e()
+              ],
+              2
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "fade" } }, [
+        _vm.step === 4
+          ? _c("div", { staticClass: "checkout-div checkout-final" }, [
+              _c("h2", [_vm._v("Naročilo je bilo uspešno!")]),
+              _vm._v(" "),
+              _c("h3", [_vm._v("Hvala za nakup!")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "\n                Podatki o naročilo so bili poslani na vaš e-naslov (" +
+                    _vm._s(_vm.email) +
+                    ").\n            "
+                )
               ])
             ])
           : _vm._e()
