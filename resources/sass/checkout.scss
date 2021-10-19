@@ -14,7 +14,7 @@ body {
     background: $leaves-image-phone no-repeat center center fixed;
     background-size: cover;
 
-    @media screen and (min-width: 1000px) {
+    @media screen and (min-width: $break-1000) {
         background-image: $leaves-image-desktop;
     }
 }
@@ -26,7 +26,7 @@ body {
     min-height: 100%;
     padding-bottom: 15vh;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: $break-768) {
         padding-bottom: 0;
     }
 }
@@ -54,18 +54,30 @@ main {
     }
 }
 
+.checkout-final {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        text-align: center;
+    }
+}
+
 form {
     display: flex;
     width: 90%;
     max-width: 620px;
     min-height: 60vh;
 
-    @media screen and (min-width: 500px) {
+    @media screen and (min-width: $break-768) {
         width: 60%;
     }
 }
 
-h3 {
+h3,
+h2 {
     text-align: center;
     margin: 0;
     padding-block: 1em;
@@ -76,17 +88,22 @@ h3 {
     position: relative;
     margin: auto;
     flex-wrap: wrap;
-
-    @media screen and (min-width: 500px) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     label {
         margin-inline: 10px;
         opacity: 0.7;
         flex-basis: 25%;
+
+        &.user-data {
+            flex-basis: 100%;
+
+            @media screen and (min-width: 455px) {
+                flex-basis: 25%;
+            }
+        }
     }
 
     input:not([type="radio"]),
@@ -138,6 +155,11 @@ h3 {
             background-color: $form-green-focus;
             box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
         }
+
+        &[disabled] {
+            background: #ababab;
+            box-shadow: 7px 7px 13px #919191, -7px -7px 13px #c5c5c5;
+        }
     }
 }
 
@@ -151,6 +173,7 @@ h3 {
 }
 
 .form-has-recaptcha {
+    height: 78px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,10 +182,10 @@ h3 {
 .form-recaptcha {
     position: absolute;
     top: 0;
-    transform: scale(0.75);
+    transform: scale(0.77);
     transform-origin: center;
 
-    @media screen and (min-width: 620px) {
+    @media screen and (min-width: $break-768) {
         transform: none;
     }
 }
@@ -228,7 +251,7 @@ h3 {
         flex-basis: 50%;
         text-align: center;
 
-        @media screen and (min-width: 500px) {
+        @media screen and (min-width: $break-512) {
             flex-basis: auto;
         }
     }
@@ -260,6 +283,31 @@ h3 {
     border-radius: 40px;
 }
 
+.overview-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0;
+
+    &-row {
+        display: flex;
+        width: 80%;
+        padding: 0.5em 0;
+        border-radius: 5px;
+
+        span {
+            flex-basis: 50%;
+            align-self: center;
+            padding: 0 1em;
+        }
+
+        &:nth-child(odd) {
+            background-color: #d3d3d3;
+        }
+    }
+}
+
 .error-msg {
     flex-basis: 100%;
     text-align: center;
@@ -281,7 +329,7 @@ h3 {
         transition: box-shadow 0.3s $cubic-bezier, transform 0.2s $cubic-bezier;
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: $break-768) {
         top: 1%;
         left: 1%;
     }

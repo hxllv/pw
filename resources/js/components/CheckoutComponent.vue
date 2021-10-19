@@ -37,14 +37,14 @@
             <div class="checkout-div has-step-controls" v-if="step === 1">
                 <h3>Osebni podatki</h3>
                 <div class="form-input">
-                    <label for="ime">Ime</label>
+                    <label class="user-data" for="ime">Ime</label>
                     <input v-model="ime" type="text" name="ime" id="ime" />
                     <div class="error-msg" v-if="'ime' in userErr">
                         {{ userErr.ime[0] }}
                     </div>
                 </div>
                 <div class="form-input">
-                    <label for="priimek">Priimek</label>
+                    <label class="user-data" for="priimek">Priimek</label>
                     <input
                         v-model="priimek"
                         type="text"
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="form-input">
-                    <label for="email">e-naslov</label>
+                    <label class="user-data" for="email">e-naslov</label>
                     <input
                         v-model="email"
                         type="email"
@@ -68,14 +68,14 @@
                     </div>
                 </div>
                 <div class="form-input">
-                    <label for="tel">Telefonska št.</label>
+                    <label class="user-data" for="tel">Telefonska št.</label>
                     <input v-model="tel" type="tel" name="tel" id="tel" />
                     <div class="error-msg" v-if="'tel' in userErr">
                         {{ userErr.tel[0] }}
                     </div>
                 </div>
                 <div class="form-input">
-                    <label for="naslov">Naslov</label>
+                    <label class="user-data" for="naslov">Naslov</label>
                     <input
                         v-model="naslov"
                         type="text"
@@ -87,14 +87,14 @@
                     </div>
                 </div>
                 <div class="form-input">
-                    <label for="kraj">Kraj</label>
+                    <label class="user-data" for="kraj">Kraj</label>
                     <input v-model="kraj" type="text" name="kraj" id="kraj" />
                     <div class="error-msg" v-if="'kraj' in userErr">
                         {{ userErr.kraj[0] }}
                     </div>
                 </div>
                 <div class="form-input">
-                    <label for="posta">Poštna številka</label>
+                    <label class="user-data" for="posta">Poštna številka</label>
                     <input
                         v-model="posta"
                         type="text"
@@ -157,6 +157,53 @@
         <transition name="fade">
             <div class="checkout-div has-step-controls" v-if="step === 3">
                 <h3>Pregled naročila</h3>
+                <div
+                    class="cart-item"
+                    v-for="(item, id) in cartItemsFinal"
+                    :key="id"
+                >
+                    <img :src="`/storage/${item.main_image}`" />
+                    <span class="cart-item-text">
+                        {{ item.title }}
+                    </span>
+                    <span class="cart-item-text">
+                        {{ item.price }} &euro;
+                    </span>
+                </div>
+                <div style="text-align: center; font-size: 1.6rem">
+                    Skupaj: {{ price }} &euro;
+                </div>
+                <div class="overview-data">
+                    <div class="overview-data-row">
+                        <span>Ime:</span>
+                        <span>{{ userDataFinal.ime }}</span>
+                    </div>
+                    <div class="overview-data-row">
+                        <span>Priimek:</span>
+                        <span>{{ userDataFinal.priimek }}</span>
+                    </div>
+                    <div class="overview-data-row">
+                        <span>e-naslov:</span>
+                        <span>{{ userDataFinal.email }}</span>
+                    </div>
+                    <div class="overview-data-row">
+                        <span>Telefonska št.:</span>
+                        <span>{{ userDataFinal.tel }}</span>
+                    </div>
+
+                    <div class="overview-data-row">
+                        <span>Naslov:</span
+                        ><span>{{ userDataFinal.naslov }}</span>
+                    </div>
+                    <div class="overview-data-row">
+                        <span>Kraj:</span>
+                        <span>{{ userDataFinal.kraj }}</span>
+                    </div>
+                    <div class="overview-data-row">
+                        <span>Poštna št.:</span>
+                        <span>{{ userDataFinal.posta }}</span>
+                    </div>
+                </div>
                 <div class="form-input form-has-recaptcha">
                     <div class="form-recaptcha">
                         <vue-recaptcha
@@ -164,7 +211,7 @@
                             ref="recaptcha"
                             @verify="onCaptchaVerified"
                             @expired="onCaptchaExpired"
-                            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                            sitekey="6LfYy7IcAAAAADHJIeDTvhU1XPnhR0LIclRJ5F2t"
                         ></vue-recaptcha>
                     </div>
                 </div>
@@ -172,8 +219,24 @@
                     <a v-on:click="decrementStep">
                         Nazaj
                     </a>
-                    <input type="submit" value="Naroči" />
+                    <input ref="formSubmit" type="submit" value="Naroči" />
                 </div>
+                <div class="load-overlay" v-if="loading">
+                    <span class="span-dot-1">.</span>
+                    <span class="span-dot-2">.</span>
+                    <span class="span-dot-3">.</span>
+                </div>
+            </div>
+        </transition>
+        <transition name="fade">
+            <div class="checkout-div checkout-final" v-if="step === 4">
+                <h2>Naročilo je bilo uspešno!</h2>
+                <h3>Hvala za nakup!</h3>
+                <p>
+                    Podatki o naročilo so bili poslani na vaš e-naslov ({{
+                        email
+                    }}).
+                </p>
             </div>
         </transition>
     </form>
@@ -184,19 +247,22 @@ import VueRecaptcha from "vue-recaptcha";
 export default {
     data() {
         return {
-            step: 3,
+            step: 0,
             captchaToken: null,
             userErr: {},
-            ime: "",
-            priimek: "",
-            email: "",
-            tel: "",
-            naslov: "",
-            kraj: "",
-            posta: "",
+            userDataFinal: {},
+            ime: "Nace",
+            priimek: "Tavčer",
+            email: "nt@gmail.si",
+            tel: "123123123",
+            naslov: "Dol vas 22",
+            kraj: "Petold",
+            posta: "1523",
             loading: false,
             itemErr: {},
-            cartItems: JSON.parse(localStorage.cart)
+            cartItems: JSON.parse(localStorage.cart),
+            cartItemsFinal: {},
+            price: 0
         };
     },
     methods: {
@@ -225,6 +291,8 @@ export default {
                     this.itemErr = {};
                     if (response.data && "error" in response.data)
                         return (this.itemErr = response.data.error);
+                    this.cartItemsFinal = response.data.items;
+                    this.price = response.data.price;
                     this.incrementStep();
                 })
                 .catch(e => {
@@ -249,6 +317,7 @@ export default {
                     this.userErr = {};
                     if (response.data && "error" in response.data)
                         return (this.userErr = response.data.error);
+                    this.userDataFinal = response.data.data;
                     this.incrementStep();
                 })
                 .catch(e => {
@@ -257,23 +326,29 @@ export default {
                 });
         },
         onCaptchaVerified(token) {
-            const time = setTimeout(() => {
-                this.captchaToken = token;
-                clearTimeout(time);
-            }, 1000);
+            this.captchaToken = token;
+            this.$refs.formSubmit.disabled = false;
         },
         onCaptchaExpired() {
             this.$refs.recaptcha.reset();
         },
         onSubmit(e) {
             e.preventDefault();
-            this.$refs.recaptcha.reset();
+            this.loading = true;
             axios
                 .post("/checkout/captcha", {
                     token: this.captchaToken
                 })
                 .then(response => {
-                    console.log(response.data);
+                    this.loading = false;
+                    this.$refs.recaptcha.reset();
+                    if (response.data.success) {
+                        this.incrementStep();
+                    }
+                })
+                .catch(e => {
+                    this.loading = false;
+                    console.log(e);
                 });
         },
         removeItemFromCart(id) {
