@@ -114,7 +114,7 @@ p {
 .container {
     width: 92%;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: $break-768) {
         width: 80%;
     }
 }
@@ -122,11 +122,11 @@ p {
 .container-i {
     width: 60%;
 
-    @media screen and (min-width: 512px) {
+    @media screen and (min-width: $break-512) {
         width: 70%;
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: $break-768) {
         width: 80%;
     }
 }
@@ -137,7 +137,7 @@ p {
     grid-template-columns: 100%;
     grid-template-rows: auto;
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: $break-1200) {
         grid-template-columns: 50% 50%;
     }
 }
@@ -145,7 +145,7 @@ p {
 .p {
     width: 100%;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: $break-768) {
         width: 50%;
     }
 
@@ -523,7 +523,7 @@ nav {
         transition: box-shadow 0.3s $cubic-bezier, transform 0.2s $cubic-bezier;
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: $break-768) {
         top: 1%;
         left: 1%;
     }
@@ -553,7 +553,7 @@ footer {
     background-blend-mode: multiply;
     color: $white;
 
-    @media screen and (min-width: 1000px) {
+    @media screen and (min-width: $break-1000) {
         background-image: $leaves-image-desktop;
     }
 
@@ -571,7 +571,7 @@ footer {
     position: relative;
     z-index: 999;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: $break-768) {
         flex-direction: row;
 
         > div {
@@ -618,7 +618,7 @@ footer {
     flex-direction: column;
     min-height: 100vh;
 
-    @media screen and (min-width: 1000px) {
+    @media screen and (min-width: $break-1000) {
         background-image: $leaves-image-desktop;
     }
 
@@ -678,7 +678,7 @@ footer {
         width: 60%;
     }
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: $break-1200) {
         width: 100%;
     }
 }
@@ -711,11 +711,11 @@ footer {
     position: relative;
     flex-basis: 100%;
 
-    @media screen and (min-width: 512px) {
+    @media screen and (min-width: $break-512) {
         flex-basis: 50%;
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: $break-768) {
         flex-basis: 33.333%;
     }
 }
@@ -906,7 +906,7 @@ contact section
     }
 
     &.inline {
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: $break-768) {
             display: flex;
 
             .inline-group {
