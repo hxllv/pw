@@ -34,17 +34,17 @@
 export default {
     data() {
         return {
-            cartItems: JSON.parse(window.localStorage.cart)
+            cartItems: JSON.parse(localStorage.cart || "{}")
         };
     },
     methods: {
         openCart() {
-            this.cartItems = JSON.parse(window.localStorage.cart);
+            this.cartItems = JSON.parse(localStorage.cart);
         },
         removeItemFromCart(id) {
-            let cart = JSON.parse(window.localStorage.cart);
+            let cart = JSON.parse(localStorage.cart);
             delete cart[id];
-            window.localStorage.cart = JSON.stringify(cart);
+            localStorage.cart = JSON.stringify(cart);
             this.cartItems = cart;
         }
     }

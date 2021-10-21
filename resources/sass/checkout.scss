@@ -86,11 +86,16 @@ h2 {
 .form-input {
     padding-bottom: 10px;
     position: relative;
-    margin: auto;
+    margin: 0 auto;
     flex-wrap: wrap;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &-opombe {
+        flex-direction: column;
+        margin: 2em 0;
+    }
 
     label {
         margin-inline: 10px;
@@ -111,6 +116,7 @@ h2 {
     select,
     button,
     a {
+        box-sizing: border-box;
         display: block;
         border: none;
         color: #000000b3;
@@ -137,6 +143,15 @@ h2 {
 
     textarea {
         resize: none;
+        width: 80%;
+
+        @media screen and (min-width: $break-512) {
+            width: 50%;
+        }
+    }
+
+    a {
+        text-decoration: none;
     }
 
     input[type="submit"],
@@ -292,9 +307,13 @@ h2 {
 
     &-row {
         display: flex;
-        width: 80%;
+        width: 90%;
         padding: 0.5em 0;
         border-radius: 5px;
+
+        @media screen and (min-width: $break-768) {
+            width: 80%;
+        }
 
         span {
             flex-basis: 50%;

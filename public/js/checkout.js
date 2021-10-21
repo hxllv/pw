@@ -2090,6 +2090,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2098,16 +2115,17 @@ __webpack_require__.r(__webpack_exports__);
       captchaToken: null,
       userErr: {},
       userDataFinal: {},
-      ime: "Nace",
-      priimek: "Tavčer",
-      email: "nt@gmail.si",
-      tel: "123123123",
-      naslov: "Dol vas 22",
-      kraj: "Petold",
-      posta: "1523",
+      ime: "",
+      priimek: "",
+      email: "",
+      tel: "",
+      naslov: "",
+      kraj: "",
+      posta: "",
       loading: false,
       itemErr: {},
-      cartItems: JSON.parse(localStorage.cart),
+      cartItems: JSON.parse(localStorage.cart || "{}"),
+      opombe: "",
       cartItemsFinal: {},
       price: 0
     };
@@ -2136,7 +2154,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       axios.post("/checkout/items", {
-        items: JSON.stringify(this.cartItems)
+        items: JSON.stringify(this.cartItems),
+        opombe: this.opombe
       }).then(function (response) {
         _this3.loading = false;
         _this3.itemErr = {};
@@ -2202,9 +2221,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     removeItemFromCart: function removeItemFromCart(id) {
-      var cart = JSON.parse(window.localStorage.cart);
+      var cart = JSON.parse(localStorage.cart);
+      if (!cart) return;
       delete cart[id];
-      window.localStorage.cart = JSON.stringify(cart);
+      localStorage.cart = JSON.stringify(cart);
       this.cartItems = cart;
     }
   },
@@ -38154,7 +38174,7 @@ var render = function() {
         _vm.step <= 0
           ? _c(
               "div",
-              { staticClass: "checkout-div" },
+              { staticClass: "checkout-div has-step-controls" },
               [
                 _vm._l(_vm.cartItems, function(item, id) {
                   return _c("div", { key: id, staticClass: "cart-item" }, [
@@ -38189,6 +38209,36 @@ var render = function() {
                     )
                   ])
                 }),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-input form-input-opombe" }, [
+                  _c("label", { attrs: { for: "opombe" } }, [_vm._v("Opombe")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.opombe,
+                        expression: "opombe"
+                      }
+                    ],
+                    attrs: {
+                      name: "opombe",
+                      id: "opombe",
+                      cols: "30",
+                      rows: "5"
+                    },
+                    domProps: { value: _vm.opombe },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.opombe = $event.target.value
+                      }
+                    }
+                  })
+                ]),
                 _vm._v(" "),
                 "items" in _vm.itemErr
                   ? _c("div", { staticClass: "error-msg" }, [
@@ -38663,6 +38713,12 @@ var render = function() {
                     _c("span", [_vm._v("Poštna št.:")]),
                     _vm._v(" "),
                     _c("span", [_vm._v(_vm._s(_vm.userDataFinal.posta))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "overview-data-row" }, [
+                    _c("span", [_vm._v("Opombe:")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.opombe || "/"))])
                   ])
                 ]),
                 _vm._v(" "),
@@ -38726,6 +38782,12 @@ var render = function() {
                     _vm._s(_vm.email) +
                     ").\n            "
                 )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-input" }, [
+                _c("a", { attrs: { href: "/" } }, [
+                  _vm._v("Nazaj na glavno stran")
+                ])
               ])
             ])
           : _vm._e()

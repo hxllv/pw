@@ -33,7 +33,8 @@ class CheckoutController extends Controller
                 [
                     'userData' => session('userData'), 
                     'items' => session('items'),
-                    'price' => session('price')
+                    'price' => session('price'),
+                    'notes' => session('notes')
                 ]
             ));
 
@@ -51,7 +52,7 @@ class CheckoutController extends Controller
     public function checkItems()
     {
         $validator = Validator::make(request()->all(), [
-            'items' => 'required|json'
+            'items' => 'required|json',
         ]);
 
         if ($validator->fails())
@@ -59,6 +60,16 @@ class CheckoutController extends Controller
                 'items' => 'Poslani podatki niso v obliki JSON, obrnite se na skrbnika spletne strani.'
             ]]);
 
+        $validator = Validator::make(request()->all(), [
+            'opombe' => 'string|nullable',
+        ]);
+
+        if ($validator->fails())
+            return response()->json(['error' => [
+                'items' => 'Neveljavni vnos.'
+            ]]);
+
+        session(['notes' => request()->all()['opombe']]);
         $data = json_decode(request()->all()['items'], true);
 
         if (count($data) === 0)

@@ -1,7 +1,7 @@
 <template>
     <form method="post" @submit="onSubmit">
         <transition name="fade">
-            <div class="checkout-div" v-if="step <= 0">
+            <div class="checkout-div has-step-controls" v-if="step <= 0">
                 <div
                     class="cart-item"
                     v-for="(item, id) in cartItems"
@@ -17,6 +17,16 @@
                     <a v-on:click="removeItemFromCart(id)">
                         X
                     </a>
+                </div>
+                <div class="form-input form-input-opombe">
+                    <label for="opombe">Opombe</label>
+                    <textarea
+                        v-model="opombe"
+                        name="opombe"
+                        id="opombe"
+                        cols="30"
+                        rows="5"
+                    ></textarea>
                 </div>
                 <div class="error-msg" v-if="'items' in itemErr">
                     {{ itemErr.items }}
@@ -203,6 +213,10 @@
                         <span>Poštna št.:</span>
                         <span>{{ userDataFinal.posta }}</span>
                     </div>
+                    <div class="overview-data-row">
+                        <span>Opombe:</span>
+                        <span>{{ opombe || "/" }}</span>
+                    </div>
                 </div>
                 <div class="form-input form-has-recaptcha">
                     <div class="form-recaptcha">
@@ -237,6 +251,9 @@
                         email
                     }}).
                 </p>
+                <div class="form-input">
+                    <a href="/">Nazaj na glavno stran</a>
+                </div>
             </div>
         </transition>
     </form>
@@ -251,16 +268,17 @@ export default {
             captchaToken: null,
             userErr: {},
             userDataFinal: {},
-            ime: "Nace",
-            priimek: "Tavčer",
-            email: "nt@gmail.si",
-            tel: "123123123",
-            naslov: "Dol vas 22",
-            kraj: "Petold",
-            posta: "1523",
+            ime: "",
+            priimek: "",
+            email: "",
+            tel: "",
+            naslov: "",
+            kraj: "",
+            posta: "",
             loading: false,
             itemErr: {},
-            cartItems: JSON.parse(localStorage.cart),
+            cartItems: JSON.parse(localStorage.cart || "{}"),
+            opombe: "",
             cartItemsFinal: {},
             price: 0
         };
@@ -284,7 +302,8 @@ export default {
             this.loading = true;
             axios
                 .post("/checkout/items", {
-                    items: JSON.stringify(this.cartItems)
+                    items: JSON.stringify(this.cartItems),
+                    opombe: this.opombe
                 })
                 .then(response => {
                     this.loading = false;
@@ -352,9 +371,11 @@ export default {
                 });
         },
         removeItemFromCart(id) {
-            let cart = JSON.parse(window.localStorage.cart);
+            let cart = JSON.parse(localStorage.cart);
+            if (!cart) return;
+
             delete cart[id];
-            window.localStorage.cart = JSON.stringify(cart);
+            localStorage.cart = JSON.stringify(cart);
             this.cartItems = cart;
         }
     },

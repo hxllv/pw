@@ -85,11 +85,15 @@ h2 {
 .form-input {
   padding-bottom: 10px;
   position: relative;
-  margin: auto;
+  margin: 0 auto;
   flex-wrap: wrap;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.form-input-opombe {
+  flex-direction: column;
+  margin: 2em 0;
 }
 .form-input label {
   margin-inline: 10px;
@@ -109,6 +113,7 @@ h2 {
 .form-input select,
 .form-input button,
 .form-input a {
+  box-sizing: border-box;
   display: block;
   border: none;
   color: #000000b3;
@@ -139,6 +144,15 @@ h2 {
 }
 .form-input textarea {
   resize: none;
+  width: 80%;
+}
+@media screen and (min-width: 512px) {
+  .form-input textarea {
+    width: 50%;
+  }
+}
+.form-input a {
+  text-decoration: none;
 }
 .form-input input[type=submit],
 .form-input button,
@@ -303,9 +317,14 @@ h2 {
 }
 .overview-data-row {
   display: flex;
-  width: 80%;
+  width: 90%;
   padding: 0.5em 0;
   border-radius: 5px;
+}
+@media screen and (min-width: 768px) {
+  .overview-data-row {
+    width: 80%;
+  }
 }
 .overview-data-row span {
   flex-basis: 50%;
