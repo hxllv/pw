@@ -29,17 +29,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $types = Cache::remember("types", now()->addMinutes(120), function() {
-            return Type::get();
-        });
+        $types = Type::get();
 
-        $items = Cache::remember("items", now()->addMinutes(120), function() {
-            return Item::get();
-        });
+        $items = Item::get();
 
-        $imgs = Cache::remember("imgs", now()->addMinutes(120), function() {
-            return Image::get();
-        });
+        $imgs = Image::get();
 
         return view('home')->with("types", $types)->with("items", $items)->with("imgs", $imgs);
     }

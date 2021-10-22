@@ -52,11 +52,11 @@
         <h1 class="title pirata section-header">Izdelki</h1>
         <h1 class="bigger-subtitle pirata success">Trenutno razpoložljivi izdelki</h1>
         @foreach ($types as $type)
-            <div class="type">
-                <h1 class="subtitle pirata">{{ $type->name }}</h1>
-                <div class="items">       
-                    @foreach ($items as $item)
-                        @if ($item->type_id == $type->id && $item->available)
+            @if ($type->hasManyItems->where('available', '=', true)->count())
+                <div class="type">
+                    <h1 class="subtitle pirata">{{ $type->name }}</h1>
+                    <div class="items">       
+                        @foreach ($type->hasManyItems->where('available', '=', true) as $item)
                             <div class="item" tabindex="0" 
                                 onmouseenter="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})" 
                                 onmouseleave="itemMouseLeave(this)"  
@@ -83,10 +83,10 @@
                                     @endforeach
                                 </div>
                             </div>
-                        @endif
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+            @endif
         @endforeach
         <h1 class="bigger-subtitle pirata error">Že prodani izdelki</h1>
         <div>
