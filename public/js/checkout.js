@@ -2231,6 +2231,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     step: function step() {
       if (this.$refs.recaptcha) this.$refs.recaptcha.reset();
+      if (this.step === 4) localStorage.cart = "{}";
     }
   },
   components: {
