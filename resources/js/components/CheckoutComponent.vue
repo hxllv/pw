@@ -382,6 +382,7 @@ export default {
     watch: {
         step: function() {
             if (this.$refs.recaptcha) this.$refs.recaptcha.reset();
+            if (this.step === 4) localStorage.cart = "{}";
         }
     },
     components: { VueRecaptcha }

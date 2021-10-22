@@ -15,8 +15,6 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        session_start();
-        session_create_id();
         return view('checkout');
     }
 
@@ -43,6 +41,12 @@ class CheckoutController extends Controller
                 return response()->json(['success' => false]);
             }
 
+            foreach (session('items') as $item) {
+                $item->available = false;
+                $item->save();
+            }
+
+            session()->invalidate();
             return response()->json(['success' => true]);
         }
 
@@ -77,13 +81,17 @@ class CheckoutController extends Controller
 
         $items = [];
         $price = 0;
-        foreach ($data as $key => $itemNotUsed) {
+        foreach ($data as $key => $itemJson) {
             $item = Item::find($key);
 
             if ($item === null)
                 return response()->json(['error' => [
-                    'items' => 'Izdelek v košarici ima neveljaven ID, obrnite se na skrbnika spletne strani.'
-                    ]]);
+                    'items' => 'Izdelek "'.$itemJson['title'].'" v košarici ima neveljaven ID, obrnite se na skrbnika spletne strani.'
+                ]]);
+            if (!$item->available) 
+                return response()->json(['error' => [
+                    'items' => 'Izdelek "'.$itemJson['title'].'" v košarici ni na voljo, obrnite se na skrbnika spletne strani.'
+                ]]);
 
             $items[$key] = $item;
             $price += $item->price;
