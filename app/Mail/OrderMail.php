@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Str;
 
 class OrderMail extends Mailable
 {
@@ -29,6 +28,6 @@ class OrderMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Pragwald Woodworks - Naročilo s številko "'. Str::uuid()->toString() .'"')->markdown('emails.order-email', ["data" => $this->data]);
+        return $this->subject('Pragwald Woodworks - Naročilo s številko "' . $this->data['id'] . '"')->markdown('emails.order-email', ["data" => $this->data]);
     }
 }
