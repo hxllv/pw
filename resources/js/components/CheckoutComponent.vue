@@ -14,7 +14,11 @@
                     <span class="cart-item-text">
                         {{ item.price }} &euro;
                     </span>
-                    <a v-on:click="removeItemFromCart(id)">
+                    <a
+                        tabindex="0"
+                        v-on:click="removeItemFromCart(id)"
+                        v-on:keyup.enter="removeItemFromCart(id)"
+                    >
                         X
                     </a>
                 </div>
@@ -29,10 +33,14 @@
                     ></textarea>
                 </div>
                 <div class="error-msg" v-if="'items' in itemErr">
-                    {{ itemErr.items }}
+                    {{ itemErr }}
                 </div>
                 <div class="form-input form-step">
-                    <a v-on:click="itemsFwd">
+                    <a
+                        tabindex="0"
+                        v-on:click="itemsValidate"
+                        v-on:keyup.enter="itemsValidate"
+                    >
                         Naprej
                     </a>
                 </div>
@@ -116,10 +124,18 @@
                     </div>
                 </div>
                 <div class="form-input form-step">
-                    <a v-on:click="decrementStep">
+                    <a
+                        tabindex="0"
+                        v-on:click="decrementStep"
+                        v-on:keyup.enter="decrementStep"
+                    >
                         Nazaj
                     </a>
-                    <a v-on:click="userDataFwd">
+                    <a
+                        tabindex="0"
+                        v-on:click="userDataValidate"
+                        v-on:keyup.enter="userDataValidate"
+                    >
                         Naprej
                     </a>
                 </div>
@@ -155,10 +171,18 @@
                     <label for="placilo">Plačilo po povzetju</label>
                 </div>
                 <div class="form-input form-step">
-                    <a v-on:click="decrementStep">
+                    <a
+                        tabindex="0"
+                        v-on:click="decrementStep"
+                        v-on:keyup.enter="decrementStep"
+                    >
                         Nazaj
                     </a>
-                    <a v-on:click="incrementStep">
+                    <a
+                        tabindex="0"
+                        v-on:click="incrementStep"
+                        v-on:keyup.enter="incrementStep"
+                    >
                         Pregled
                     </a>
                 </div>
@@ -230,7 +254,11 @@
                     </div>
                 </div>
                 <div class="form-input form-step">
-                    <a v-on:click="decrementStep">
+                    <a
+                        tabindex="0"
+                        v-on:click="decrementStep"
+                        v-on:keyup.enter="decrementStep"
+                    >
                         Nazaj
                     </a>
                     <input ref="formSubmit" type="submit" value="Naroči" />
@@ -252,7 +280,7 @@
                     }}).
                 </p>
                 <div class="form-input">
-                    <a href="/">Nazaj na glavno stran</a>
+                    <a tabindex="0" href="/">Nazaj na glavno stran</a>
                 </div>
             </div>
         </transition>
@@ -298,7 +326,7 @@ export default {
                 clearTimeout(time);
             }, 500);
         },
-        itemsFwd() {
+        itemsValidate() {
             this.loading = true;
             axios
                 .post("/checkout/items", {
@@ -308,7 +336,7 @@ export default {
                 .then(response => {
                     this.loading = false;
                     this.itemErr = {};
-                    if (response.data && "error" in response.data)
+                    if ("error" in response.data)
                         return (this.itemErr = response.data.error);
                     this.cartItemsFinal = response.data.items;
                     this.price = response.data.price;
@@ -319,7 +347,7 @@ export default {
                     console.log(e);
                 });
         },
-        userDataFwd() {
+        userDataValidate() {
             this.loading = true;
             axios
                 .post("/checkout/userdata", {
@@ -334,7 +362,7 @@ export default {
                 .then(response => {
                     this.loading = false;
                     this.userErr = {};
-                    if (response.data && "error" in response.data)
+                    if ("error" in response.data)
                         return (this.userErr = response.data.error);
                     this.userDataFinal = response.data.data;
                     this.incrementStep();

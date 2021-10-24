@@ -1,5 +1,10 @@
 <template>
-    <a class="add-to-cart" v-on:click="addToCart">
+    <a
+        tabindex="0"
+        class="add-to-cart"
+        v-on:click="addToCart"
+        v-on:keyup.enter="addToCart"
+    >
         V voziček
     </a>
 </template>
@@ -11,7 +16,6 @@ export default {
         addToCart() {
             const self = this._props;
             let cart = JSON.parse(localStorage.cart || "{}");
-            console.log(self.itemImg);
 
             cart[self.itemId] = {
                 img: self.itemImg.replace("/", "/500_"),
