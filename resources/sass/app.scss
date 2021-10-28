@@ -79,6 +79,21 @@ p {
   basic layout
 =============*/
 
+.subtitle.divider {
+    position: relative;
+    padding-left: 1em;
+}
+
+.subtitle.divider::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: $green;
+}
+
 .container,
 .container-i {
     margin: 0 auto;
@@ -118,6 +133,7 @@ p {
 }
 
 .p {
+    margin: auto;
     width: 100%;
     max-width: 70ch;
     @media screen and (min-width: $break-768) {
@@ -308,29 +324,30 @@ section {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    margin-bottom: 12vw;
+    z-index: 0;
 
     &.flip {
         transform: rotateX(180deg);
-    }
-}
-
-.wave {
-    background-image: url("/images/waves.svg");
-    margin-bottom: 11vw;
-
-    &.flip {
         margin-bottom: 0;
-        margin-top: 11vw;
+        margin-top: 12vw;
     }
 }
 
-.wave::after {
+.spacer::after {
     content: "";
-    background-color: $black;
     height: 12vw;
     width: 100vw;
     position: absolute;
     bottom: -12vw;
+}
+
+.wave {
+    background-image: url("/images/waves.svg");
+}
+
+.wave::after {
+    background-color: $black;
 }
 
 .wave-start {
@@ -344,12 +361,7 @@ section {
 }
 
 .wave-start::after {
-    content: "";
     background-color: $white;
-    height: 12vw;
-    width: 100vw;
-    position: absolute;
-    bottom: -12vw;
 }
 
 /* ============
@@ -704,21 +716,6 @@ footer {
 
 .type {
     margin-top: 2em;
-
-    .subtitle {
-        position: relative;
-        padding-left: 1em;
-    }
-
-    .subtitle::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background-color: $green;
-    }
 }
 
 .items {

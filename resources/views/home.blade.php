@@ -18,7 +18,7 @@
             <h1 class="title pirata section-header">O nas</h1>
             <div class="dual-col">
                 <div>
-                    <h1 class="subtitle pirata">Lorem</h1>
+                    <h1 class="bigger-subtitle pirata">Lorem</h1>
                     <p>
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                         Cupiditate officiis laboriosam aspernatur iusto, ratione
@@ -28,7 +28,7 @@
                         Excepturi, architecto. Voluptatem, voluptate provident
                         reiciendis asperiores vero nobis!
                     </p>
-                    <h1 class="subtitle pirata">Ipsum</h1>
+                    <h1 class="bigger-subtitle pirata">Ipsum</h1>
                     <p>
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                         Cupiditate officiis laboriosam aspernatur iusto, ratione
@@ -51,16 +51,15 @@
         <div class="container">
             <h1 class="title pirata section-header">Izdelki</h1>
             <div class="items-subsection">
-                <h1 class="bigger-subtitle pirata text-center">Trenutno razpoložljivi izdelki</h1>
                 @if (!$items->where('available', '=', true)->count())
-                    <h3 style="padding-left: 3em;">
+                    <h3 class="text-center">
                         Žal trenutno ni nobenih izdelkov!
                     </h3>
                 @endif
                 @foreach ($types as $type)
                     @if ($type->hasManyItems->where('available', '=', true)->count())
                         <div class="type">
-                            <h1 class="subtitle pirata">{{ $type->name }}</h1>
+                            <h1 class="subtitle divider pirata">{{ $type->name }}</h1>
                             <div class="items">
                                 @foreach ($type->hasManyItems->where('available', '=', true) as $item)
                                     <div class="item" tabindex="0"
@@ -107,7 +106,7 @@
                 @endforeach
             </div>
             <div class="items-subsection">
-                <h1 class="bigger-subtitle pirata text-center">Galerija že prodanih izdelkov</h1>
+                <h1 class="subtitle divider pirata">Galerija že prodanih izdelkov</h1>
                 <div>
                     <div class="items">
                         @foreach ($items as $item)
@@ -144,9 +143,28 @@
                     </div>
                 </div>
             </div>
+            <div class="items-subsection" style="z-index: 2">
+                <div class="dual-col">
+                    <div class="blob-container" style="transform: rotateZ(-20deg);">
+                        <img loading="lazy" class="blob-image" src="{{ asset('images/blobcomp.svg') }}" alt="">
+                    </div>
+                    <div>
+                        <h1 class="bigger-subtitle pirata">Nega lesa</h1>
+                        <p>
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                            Cupiditate officiis laboriosam aspernatur iusto, ratione
+                            suscipit consectetur ea. Blanditiis ipsa dolorum et cum hic
+                            ab id corporis qui, vel quos veritatis repellat nobis a
+                            voluptatem provident rem quibusdam omnis ut ad eveniet!
+                            Excepturi, architecto. Voluptatem, voluptate provident
+                            reiciendis asperiores vero nobis!
+                        </p>
+                    </div>
+                </div>    
+            </div>
         </div>
     </section>
-    <div class="spacer wave flip"></div>
+    <div class="spacer wave-prep wave flip"></div>
     <section id="kontakt-section" class="white">
         <div id="kontakt" class="invis-for-nav"></div>
         <div class="container">
