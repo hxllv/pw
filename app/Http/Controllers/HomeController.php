@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Mail\MessageMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
@@ -40,23 +41,32 @@ class HomeController extends Controller
 
     public function mail()
     {
-        $data = request()->validate([
-            'ime' => 'required|string',
-            'priimek' => 'required|string',
-            'email' => 'required|email',
-            'tel' => 'required|string',
-            'zadeva' => 'required|string',
-            'sporocilo' => 'required|string',
-        ]);
+        $captchaResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => "6LfYy7IcAAAAAODUQ8HhbRVp0m-Ss1WdGIGqGMUW",
+            'response' => request('token'),
+            'remoteip' => request()->ip()
+        ])->json();
 
-        Mail::to("nace.tavcer20@gmail.com")->send(new MessageMail($data));
+        if ($captchaResponse['success']) {
 
-        if(count(Mail::failures()) > 0){
-            return response()->json([false]);
+            $data = request()->validate([
+                'ime' => 'required|string',
+                'priimek' => 'required|string',
+                'email' => 'required|email',
+                'tel' => 'required|string',
+                'zadeva' => 'required|string',
+                'sporocilo' => 'required|string',
+            ]);
+
+            Mail::to("info@pragwald-woodworks.si")->send(new MessageMail($data));
+
+            if (count(Mail::failures()) > 0) {
+                return response()->json(['success' => false]);
+            }
+
+            return response()->json(['success' => true]);
         }
 
-        return response()->json([true]);
+        return response()->json(['success' => false]);
     }
-
-    
 }
