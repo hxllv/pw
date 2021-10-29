@@ -92,6 +92,7 @@ p {
     right: 0;
     height: 2px;
     background-color: $green;
+    border-radius: 0.1em;
 }
 
 .container,
@@ -170,14 +171,18 @@ section {
     display: flex;
     position: relative;
     min-height: 100vh;
+    border-block: 3px solid;
+    margin-block: -3px;
 
     &.white {
         background-color: $white;
+        border-color: $white;
         color: $black;
     }
 
     &.black {
         background-color: $black;
+        border-color: $black;
         color: $white;
     }
 }
@@ -609,7 +614,7 @@ footer {
         border-radius: 7px;
     }
 
-    .holds-less {
+    .contacts {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -620,11 +625,11 @@ footer {
         margin: 30px 0;
     }
 
-    .less {
+    .name-email {
         font-size: 0.8rem;
     }
 
-    .more {
+    .company {
         font-size: 1.2rem;
     }
 }
@@ -970,6 +975,31 @@ contact section
             background-color: $nav-green-blur;
             box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
         }
+
+        &[disabled] {
+            background: #ababab;
+            box-shadow: 7px 7px 13px #919191, -7px -7px 13px #c5c5c5;
+        }
+    }
+}
+
+.contact-form-has-recaptcha {
+    height: 78px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+
+.contact-form-recaptcha {
+    position: absolute;
+    top: 0;
+    transform: scale(0.77);
+    transform-origin: center;
+
+    @media screen and (min-width: $break-768) {
+        transform: none;
     }
 }
 

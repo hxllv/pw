@@ -1,5 +1,5 @@
 <template>
-    <form method="post" @submit="sendMsg" class="contact-form">
+    <form method="post" @submit="onSubmit" class="contact-form">
         <div class="contact-form-input inline">
             <div class="inline-group">
                 <label for="ime">Ime*:</label>
@@ -24,7 +24,7 @@
             <label for="tel">Telefonska številka*:</label>
             <input v-model="tel" type="tel" name="tel" id="tel" />
         </div>
-        <div class="contact-form-input contact-form-dropdown">
+        <div class="contact-form-input">
             <label for="zadeva">Zadeva*:</label>
             <input v-model="zadeva" type="text" name="zadeva" id="zadeva" />
         </div>
@@ -38,11 +38,24 @@
                 rows="10"
             ></textarea>
         </div>
-        <div class="contact-form-input">
-            <button id="contact-submit">Pošlji</button>
+        <div class="contact-form-input contact-form-has-recaptcha">
+            <div class="contact-form-recaptcha">
+                <vue-recaptcha
+                    :load-recaptcha-script="true"
+                    ref="recaptcha"
+                    @verify="onCaptchaVerified"
+                    @expired="onCaptchaExpired"
+                    sitekey="6LfYy7IcAAAAADHJIeDTvhU1XPnhR0LIclRJ5F2t"
+                ></vue-recaptcha>
+            </div>
         </div>
-        <div class="contact-form-status"></div>
-        <div class="contact-form-load">
+        <div class="contact-form-input">
+            <button id="contact-submit" ref="formSubmit" disabled>
+                Pošlji
+            </button>
+        </div>
+        <div class="contact-form-status" ref="status"></div>
+        <div class="contact-form-load" ref="load">
             <span class="span-dot-1">.</span>
             <span class="span-dot-2">.</span>
             <span class="span-dot-3">.</span>
@@ -51,6 +64,7 @@
 </template>
 
 <script>
+import VueRecaptcha from "vue-recaptcha";
 export default {
     data() {
         return {
@@ -59,15 +73,25 @@ export default {
             email: "",
             tel: "",
             zadeva: "",
-            sporocilo: ""
+            sporocilo: "",
+            captchaToken: null
         };
     },
     methods: {
-        sendMsg(e) {
+        onCaptchaVerified(token) {
+            this.captchaToken = token;
+            this.$refs.formSubmit.disabled = false;
+        },
+        onCaptchaExpired() {
+            this.$refs.recaptcha.reset();
+            this.$refs.formSubmit.disabled = true;
+        },
+        onSubmit(e) {
             e.preventDefault();
 
-            const contactSubmit = document.querySelector(".contact-form-load");
-            contactSubmit.classList.add("show");
+            const contactLoad = this.$refs.load;
+            const contactStatus = this.$refs.status;
+            contactLoad.classList.add("show");
 
             axios
                 .post("/", {
@@ -76,10 +100,11 @@ export default {
                     email: this.email,
                     tel: this.tel,
                     zadeva: this.zadeva,
-                    sporocilo: this.sporocilo
+                    sporocilo: this.sporocilo,
+                    token: this.captchaToken
                 })
                 .then(response => {
-                    contactSubmit.classList.remove("show");
+                    contactLoad.classList.remove("show");
 
                     (this.ime = ""),
                         (this.priimek = ""),
@@ -88,14 +113,10 @@ export default {
                         (this.zadeva = ""),
                         (this.sporocilo = "");
 
-                    const contactStatus = document.querySelector(
-                        ".contact-form-status"
-                    );
-
                     contactStatus.classList.remove("nonfail");
                     contactStatus.classList.remove("fail");
 
-                    if (response.data[0]) {
+                    if (response.data.success) {
                         contactStatus.classList.add("nonfail");
                         contactStatus.innerHTML = "&#10003;";
                     } else {
@@ -103,6 +124,8 @@ export default {
                         contactStatus.innerHTML = "X";
                     }
 
+                    this.$refs.recaptcha.reset();
+                    this.$refs.formSubmit.disabled = true;
                     contactStatus.classList.add("show");
 
                     const time = setTimeout(() => {
@@ -114,10 +137,7 @@ export default {
                     contactStatus.classList.remove("nonfail");
                     contactStatus.classList.remove("fail");
 
-                    contactSubmit.classList.remove("show");
-                    const contactStatus = document.querySelector(
-                        ".contact-form-status"
-                    );
+                    contactLoad.classList.remove("show");
                     contactStatus.classList.add("fail");
                     contactStatus.innerHTML = "X";
 
@@ -129,6 +149,7 @@ export default {
                     }, 3000);
                 });
         }
-    }
+    },
+    components: { VueRecaptcha }
 };
 </script>

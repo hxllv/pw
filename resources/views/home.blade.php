@@ -67,7 +67,7 @@
                                         onmouseleave="itemMouseLeave(this)"
                                         onfocus="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})"
                                         onfocusout="itemMouseLeave(this)">
-                                        <div class="item-img" style="z-index: 1;">
+                                        <div class="item-img cleary-prep" style="z-index: 1;">
                                             <picture class="cleary-prep">
                                                 <source media="(min-width:2100px)"
                                                     srcset="/storage/{{ $item->main_image }}">
@@ -116,7 +116,7 @@
                                     onmouseleave="itemMouseLeave(this)"
                                     onfocus="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})"
                                     onfocusout="itemMouseLeave(this)">
-                                    <div class="item-img" style="z-index: 1;">
+                                    <div class="item-img cleary-prep" style="z-index: 1;">
                                         <picture class="cleary-prep">
                                             <source media="(min-width:2100px)" srcset="/storage/{{ $item->main_image }}">
                                             <source media="(min-width:1200px)"
@@ -145,8 +145,8 @@
             </div>
             <div class="items-subsection" style="z-index: 2">
                 <div class="dual-col">
-                    <div class="blob-container" style="transform: rotateZ(-20deg);">
-                        <img loading="lazy" class="blob-image" src="{{ asset('images/blobcomp.svg') }}" alt="">
+                    <div class="blob-container">
+                        <img loading="lazy" class="blob-image" src="{{ asset('images/blobcomp1.svg') }}" alt="">
                     </div>
                     <div>
                         <h1 class="bigger-subtitle pirata">Nega lesa</h1>
@@ -160,7 +160,7 @@
                             reiciendis asperiores vero nobis!
                         </p>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </section>
@@ -172,7 +172,7 @@
             <p class="p text-center">
                 Vas zanima kakšen izdelek zgoraj, ali pa imate svoje posebne želje za svoj unikaten izdelek?
                 Pišite nam s kontaktnem obrazcem spodaj ali pa na <a class="email"
-                    href="mailto:zan.vozlic@gmail.com">zan.vozlic@gmail.com</a>.
+                    href="mailto:info@pragwald-woodworks.si">info@pragwald-woodworks.si</a>.
             </p>
             <div>
                 <send-message></send-message>
