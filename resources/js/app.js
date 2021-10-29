@@ -167,14 +167,14 @@ window.itemMouseEnter = function(item, imgs) {
     items.forEach(notItem => {
         if (item == notItem) return;
 
-        const picture = notItem.querySelector("picture");
-        picture.classList.add("cleary");
+        const notItemImg = notItem.querySelector(".item-img");
+        notItemImg.classList.add("cleary");
     });
 
-    const picture = item.querySelector(".item-img");
+    const itemImg = item.querySelector(".item-img");
 
     const time = setTimeout(() => {
-        picture.style.zIndex = 999;
+        itemImg.style.zIndex = 999;
         clearTimeout(time);
     }, 200);
 
@@ -210,20 +210,20 @@ window.itemMouseLeave = function(item) {
     item.classList.remove("on");
     onItem = false;
 
-    const picture = item.querySelector(".item-img");
+    const itemImg = item.querySelector(".item-img");
     const detailsPictures = item.querySelectorAll(".details > picture > img");
     detailsPictures.forEach(detailPic => {
         detailPic.style.maxWidth = 0;
     });
 
-    picture.style.zIndex = 997;
+    itemImg.style.zIndex = 997;
     const time = setTimeout(() => {
-        picture.style.zIndex = 1;
+        itemImg.style.zIndex = 1;
         clearTimeout(time);
     }, 200);
 
     items.forEach(item => {
-        const picture = item.querySelector("picture");
-        picture.classList.remove("cleary");
+        const itemImg = item.querySelector(".item-img");
+        itemImg.classList.remove("cleary");
     });
 };
