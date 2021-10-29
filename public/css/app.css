@@ -86,6 +86,7 @@ p {
   right: 0;
   height: 2px;
   background-color: #1d995f;
+  border-radius: 0.1em;
 }
 
 .container,
@@ -170,13 +171,17 @@ section {
   display: flex;
   position: relative;
   min-height: 100vh;
+  border-block: 3px solid;
+  margin-block: -3px;
 }
 section.white {
   background-color: #dddddd;
+  border-color: #dddddd;
   color: #1a1a1a;
 }
 section.black {
   background-color: #1a1a1a;
+  border-color: #1a1a1a;
   color: #dddddd;
 }
 
@@ -622,7 +627,7 @@ footer .spacer.wave-start.flip {
   max-width: 30px;
   border-radius: 7px;
 }
-.footer .holds-less {
+.footer .contacts {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -631,10 +636,10 @@ footer .spacer.wave-start.flip {
 .footer .ig-link {
   margin: 30px 0;
 }
-.footer .less {
+.footer .name-email {
   font-size: 0.8rem;
 }
-.footer .more {
+.footer .company {
   font-size: 1.2rem;
 }
 
@@ -961,6 +966,32 @@ contact section
   margin: auto;
   background-color: #1d995f83;
   box-shadow: inset 7px 7px 13px #bcbcbc, inset -7px -7px 13px #fefefe;
+}
+.contact-form-input input[type=submit][disabled],
+.contact-form-input button[disabled] {
+  background: #ababab;
+  box-shadow: 7px 7px 13px #919191, -7px -7px 13px #c5c5c5;
+}
+
+.contact-form-has-recaptcha {
+  height: 78px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.contact-form-recaptcha {
+  position: absolute;
+  top: 0;
+  transform: scale(0.77);
+  transform-origin: center;
+}
+@media screen and (min-width: 768px) {
+  .contact-form-recaptcha {
+    transform: none;
+  }
 }
 
 .contact-form-status {
