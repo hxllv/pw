@@ -30,8 +30,9 @@ class CheckoutController extends Controller
         ])->json();
 
         if ($captchaResponse['success']) {
+            $uuid = Str::uuid()->toString();
             $data = [
-                'id' => Str::uuid()->toString(),
+                'id' => $uuid,
                 'userData' => session('userData'),
                 'items' => session('items'),
                 'price' => session('price'),
@@ -53,7 +54,7 @@ class CheckoutController extends Controller
 
             session()->forget(['userData', 'items', 'price', 'notes']);
             session()->regenerate();
-            return response()->json(['success' => true]);
+            return response()->json(['success' => true, 'uuid' => $uuid]);
         }
 
         return response()->json(['success' => false]);

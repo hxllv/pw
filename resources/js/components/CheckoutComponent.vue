@@ -261,7 +261,12 @@
                     >
                         Nazaj
                     </a>
-                    <input ref="formSubmit" type="submit" value="Naroči" />
+                    <input
+                        ref="formSubmit"
+                        type="submit"
+                        value="Naroči"
+                        disabled
+                    />
                 </div>
                 <div class="load-overlay" v-if="loading">
                     <span class="span-dot-1">.</span>
@@ -275,9 +280,8 @@
                 <h2>Naročilo je bilo uspešno!</h2>
                 <h3>Hvala za nakup!</h3>
                 <p>
-                    Podatki o naročilo so bili poslani na vaš e-naslov ({{
-                        email
-                    }}).
+                    Podatki o naročilu s številko "{{ orderUuid }}" so bili
+                    poslani na vaš e-naslov ({{ email }}).
                 </p>
                 <div class="form-input">
                     <a tabindex="0" href="/">Nazaj na glavno stran</a>
@@ -308,7 +312,8 @@ export default {
             cartItems: JSON.parse(localStorage.cart || "{}"),
             opombe: "",
             cartItemsFinal: {},
-            price: 0
+            price: 0,
+            orderUuid: ""
         };
     },
     methods: {
@@ -378,6 +383,7 @@ export default {
         },
         onCaptchaExpired() {
             this.$refs.recaptcha.reset();
+            this.$refs.formSubmit.disabled = true;
         },
         onSubmit(e) {
             e.preventDefault();
@@ -390,6 +396,7 @@ export default {
                     this.loading = false;
                     this.$refs.recaptcha.reset();
                     if (response.data.success) {
+                        this.orderUuid = response.data.uuid;
                         this.incrementStep();
                     }
                 })
@@ -409,7 +416,10 @@ export default {
     },
     watch: {
         step: function() {
-            if (this.$refs.recaptcha) this.$refs.recaptcha.reset();
+            if (this.$refs.recaptcha) {
+                this.$refs.recaptcha.reset();
+                this.$refs.formSubmit.disabled = true;
+            }
             if (this.step === 4) localStorage.cart = "{}";
         }
     },
