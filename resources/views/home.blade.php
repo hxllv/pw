@@ -15,28 +15,17 @@
     <section id="onas-section" class="white">
         <div id="onas" class="invis-for-nav"></div>
         <div class="container">
-            <h1 class="title pirata section-header">O nas</h1>
+            <h1 class="title pirata section-header">O meni</h1>
             <div class="dual-col">
                 <div>
-                    <h1 class="bigger-subtitle pirata">Lorem</h1>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Cupiditate officiis laboriosam aspernatur iusto, ratione
-                        suscipit consectetur ea. Blanditiis ipsa dolorum et cum hic
-                        ab id corporis qui, vel quos veritatis repellat nobis a
-                        voluptatem provident rem quibusdam omnis ut ad eveniet!
-                        Excepturi, architecto. Voluptatem, voluptate provident
-                        reiciendis asperiores vero nobis!
+                    <p style="padding-bottom: 1.5em">
+                        Živijo, moje ime je Žan in uživam v ustvarjanju ter izdelovanju lesenih izdelkov. Odraščal sem v Preboldu, v majhnem kraju v Savinjski dolini, ki je obdan s čudovitim gozdom. Ta kraj in njegova okolica sta mi vzbudila strast do narave in njenih virov. Čeprav sem po izobrazbi strojni tehnik, me kovina nikoli ni navduševala tako kot les, saj je vsako drevo in vsak list na njem nekaj unikatnega tako kot snežinka ali prstni odtis.
                     </p>
-                    <h1 class="bigger-subtitle pirata">Ipsum</h1>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Cupiditate officiis laboriosam aspernatur iusto, ratione
-                        suscipit consectetur ea. Blanditiis ipsa dolorum et cum hic
-                        ab id corporis qui, vel quos veritatis repellat nobis a
-                        voluptatem provident rem quibusdam omnis ut ad eveniet!
-                        Excepturi, architecto. Voluptatem, voluptate provident
-                        reiciendis asperiores vero nobis!
+                    <p style="padding-bottom: 1.5em">
+                        Že kot otrok sem se potikal po mizarski delavnici starega očeta Rudija in čutil, da bo les velik del mojega življenja. Všeč mi je vonj lesa, tekstura, sijaj in občutek žagovine v rokah. Najbolj pa me fascinira dejstvo, kaj vse se da iz njega narediti, če ga v roke dobi pravi mojster. Zato sem si v začetku leta 2021 s pomočjo družine in prijateljev začel ustvarjati svoj prostor za ustvarjanje, ter svojo znamko poimenoval Pragwald Woodworks.
+                    </p>
+                    <p style="padding-bottom: 1.5em">
+                        Vedno sem verjel v prave, ročno izdelane lesene izdelke, brez CNC-ja ter natančnosti na računalniški ravni. Moji izdelki nikoli ne bodo imeli te računalniške stopnje popolnosti, niti si je ne bi želel. Če ne morete povedati, da je nekaj ročno izdelano, zakaj bi potem kupili ročno izdelano kreacijo? Trudim se, da iz običajnega kosa lesa ustvarim nekaj novega, nekaj lepega ter da iz njega izvlečem maksimalno, kar mi ponuja. Izdelki, ki pridejo iz moje delavnice, so večni in vedno najvišje kakovosti, vendar z znaki, da ga je naredil človek in ne stroj.
                     </p>
                 </div>
                 <div class="blob-container">
@@ -106,7 +95,7 @@
                 @endforeach
             </div>
             <div class="items-subsection">
-                <h1 class="subtitle divider pirata">Galerija že prodanih izdelkov</h1>
+                <h1 class="subtitle divider pirata">Izdelki, ki niso več na voljo</h1>
                 <div>
                     <div class="items">
                         @foreach ($items as $item)
@@ -145,20 +134,79 @@
             </div>
             <div class="items-subsection" style="z-index: 2">
                 <div class="dual-col">
-                    <div class="blob-container">
+                    <div class="blob-container" style="align-self: start">
                         <img loading="lazy" class="blob-image" src="{{ asset('images/blobcomp1.svg') }}" alt="">
                     </div>
                     <div>
                         <h1 class="bigger-subtitle pirata">Nega lesa</h1>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                            Cupiditate officiis laboriosam aspernatur iusto, ratione
-                            suscipit consectetur ea. Blanditiis ipsa dolorum et cum hic
-                            ab id corporis qui, vel quos veritatis repellat nobis a
-                            voluptatem provident rem quibusdam omnis ut ad eveniet!
-                            Excepturi, architecto. Voluptatem, voluptate provident
-                            reiciendis asperiores vero nobis!
+                        <p style="padding-bottom: 1.5em">
+                            S pravilno oskrbo kuhinjskih in servisnih desk ter ostalih lesnih izdelkov boste preprečili pokanje ter zvijanje lesa, s tem pa bodo zdržali več let, če ne celo generacij. V lesu namreč delujejo nam nevidne sile, ki pridejo na dan ob nepravilni negi ter hrambi izdelkov. Tukaj izveste, kako za njih pravilno poskrbeti.
                         </p>
+                        <h1 class="subtitle pirata">Kako očistiti kuhinjsko/servisno desko?</h1>
+                        <ul style="padding-bottom: 1.5em">
+                            <li style="padding-bottom: 0.5em">
+                                Desko vedno operite na roke; če je v stiku z vlažno, lepljivo ali pekočo hrano jo sperite, če pa na njej režete samo kruh, jo preprosto obrišite.
+                            </li>
+                            <li style="padding-bottom: 0.5em">
+                                Za pranje deske uporabite blaga čistilna sredstva, najbolj optimalna pa je seveda samo voda.
+                            </li>
+                            <li style="padding-bottom: 0.5em">
+                                Čisto desko temeljito obrišite in postavite na stran v pokončni položaj, saj ji s tem omogočite, da se enakomerno posuši, in tako preprečite zvijanje in morebitno pokanje deske.
+                            </li>
+                            <li style="padding-bottom: 0.5em">
+                                Deske nikakor ne namakajte ali pa potapljajte v vodo, saj lahko pride do deformacij.
+                            </li>
+                            <li style="padding-bottom: 0.5em">
+                                Lesenih izdelkov tudi ne smete dati v pomivalni stroj. Prekomerna toplota in močne kemikalije detergenta za posodo bodo povzročile, da se les izsuši, ukrivi in/ali poči.
+                            </li>
+                            <li>
+                                Na deski ne uporabljajte ostrih, koncentriranih čistil.
+                            </li>
+                        </ul>
+                        <h1 class="subtitle pirata">Zakaj moramo naoljiti kuhinjske/servisne deske?</h1>
+                        <p style="padding-bottom: 1.5em">
+                            Desko je potrebno ustrezno zaščititi z oljem, da ostane sijoča, nekoliko vodoodporna in ne vpija vlage in vonjav iz hrane.
+Z oljem desko tudi zaščitimo pred nastajanjem bakterij, ki se lahko razvijejo v razpokah, ter pred zvijanjem in pokanjem.
+</p>
+<p style="padding-bottom: 1.5em">
+Najboljše olje za to je mineralno olje, katerega tudi sam uporabljam pri svojih izdelkih.
+</p>
+<p style="padding-bottom: 1.5em">
+Zakaj bi namesto tistega, ki ga že imate v kuhinji, morali uporabljati posebno olje? Deska ni ponev in za oljenje desk ne smete uporabljati jedilnega olja. Razlog? Žarkost. Tudi zelo stabilno olje, kot je kokosovo olje, bo sčasoma postalo žarko. Največja težava pri tem je vonj ter nastajanje bakterij. Držite se mineralnega olja in/ali mešanice čebeljega voska in mineralnega olja. Čebelji vosek bo naredil leseno desko bolj sijočo in vodoodporno kot naravno mineralno olje. Ker deske ni enostavno drgniti s kosom trdega voska, je bolje uporabiti mešanico mineralnega olja in čebeljega voska, kar bo poskrbelo, da bo deska v dobrem stanju.
+                        </p>
+                        <h1 class="subtitle pirata">Kdaj je potrebno kuhinjsko/servisno desko naoljiti?</h1>
+                        <p style="padding-bottom: 1.5em">
+                            Ni čarobne formule za to, kako pogosto morate naoljiti svojo desko. Poglejte jo in vedeli boste, kdaj je čas. Videti bo suha in brez leska. Za vse, ki ste v dvomih, vam lahko povem okvirno formulo, vendar se ta seveda razlikuje od stanja posamezne deske. Desko torej naoljite vsaj dvakrat na letni čas, se pravi osemkrat na leto. Če desko uporabljate velikokrat, je priporočljivo vsaj enkrat na mesec (večkrat, ko jo umijete, večkrat jo je potrebno naoljiti).
+                        </p>
+                        <p style="padding-bottom: 1.5em">
+                            Tudi podnebje je pomemben dejavnik. Pozimi na primer moram svoje deske pogosteje namazati z oljem, saj je zrak suh in temperature v hiši nihajo.
+                        </p>
+                        <p style="padding-bottom: 1.5em">
+                            Če se deska kjer koli močno razcepi, je čas, da kupite drugo. V te dele lahko pride hrana in vlaga, kar povzroči nastanek bakterij.
+                        </p>
+                        <h1 class="subtitle pirata">Kako naoljiti kuhinjsko/servisno desko?</h1>
+                        <p>Potrebovali boste:</p>
+                        <ul>
+                            <li style="padding-bottom: 0.5em">čisto in suho desko</li>
+                            <li style="padding-bottom: 0.5em">mineralno olje in/ali vosek</li>
+                            <li style="padding-bottom: 0.5em">čisto krpo (najbolje so čisti kosi starih majic ali volnenih nogavic)</li>
+                        </ul>
+                        
+                        <ol style="padding-inline-start: 20px;">
+                            <li style="padding-bottom: 1em">Na sredino deske nalijte nekaj mineralnega olja, premera približno četrtine deske. To se morda zdi veliko, vendar boste videli, koliko tekočine lahko deska absorbira.</li>
+                            <li style="padding-bottom: 1em"><p style="padding-bottom: 0.7em">S krpo z majhnimi krožnimi potezami v desko vtrite olje. To naredite po celotni površini, vključno z obema stranema in konci. Prepričajte se, da olje prodre v vse razpoke. Po potrebi olje še dodajte. Desko postavite na stran v pokončen položaj in pustite čez noč, da se olje vpije.</p>
+                            <p >Če uporabljate vosek za deske, ponovno uporabite čisto krpo, ki ne pušča vlaken. Potopite jo v vosek in ga nato s krožnimi gibi vtrite v celotno površino. Nato uporabite drugo krpo za poliranje deske do sijaja.</p></li>
+                            <li style="padding-bottom: 1em">Po želji lahko z že prepojeno krpo, katero ste uporabili za desko, naoljite še ostale lesene kuhinjske predmete ali pa spolirate leseno pohištvo. Po uporabi krpo zavrzite.</li>
+                        </ol>
+                        <h1 class="subtitle pirata">Še par trikov za čisto kuhinjsko/servisno desko</h1>
+                        <ul>
+                            <li style="padding-bottom: 0.5em">
+                                Po uporabi desko čim prej obrišite, saj tako sokovom preprečite, da bi prodrli v les, hrana pa naslednjič ne bo imela okusa po prejšnji ki ste jo rezali na deski.
+                            </li>
+                            <li style="padding-bottom: 0.5em">Po pripravi surovega mesa desko razkužite. Uporabite bodisi alkohol ali beli kis.</li>
+                            <li style="padding-bottom: 0.5em">Če deska zaudarja, ji lahko svežino povrnete tako, da po površini deske podrgnete napol prerezano limono, počakate par minut, nato pa površino deske temeljito obrišete.</li>
+                            <li style="padding-bottom: 0.5em">Ob pojavu trdovratnih madežev na njih potresite sodo bikarbono in površino zdrgnite z vlažno toplo krpo. Na koncu odvečno sodo bikarbono temeljito obrišite iz površine.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -170,9 +218,9 @@
         <div class="container">
             <h1 class="title pirata section-header">Kontakt</h1>
             <p class="p text-center">
-                Vas zanima kakšen izdelek zgoraj, ali pa imate svoje posebne želje za svoj unikaten izdelek?
-                Pišite nam s kontaktnem obrazcem spodaj ali pa na <a class="email"
-                    href="mailto:info@pragwald-woodworks.si">info@pragwald-woodworks.si</a>.
+                So ti izdelki, ki niso več na voljo, všeč in bi si želel/a kaj podobnega? Potem mi pišite preko kontaktnega obrazca spodaj, na email naslov <a class="email"
+                    href="mailto:info@pragwald-woodworks.si">info@pragwald-woodworks.si</a>, ali pa pokličite pokličite na <a class="email"
+                    href="">051 318 599</a>. Nobena želja ni prevelika!
             </p>
             <div>
                 <send-message></send-message>

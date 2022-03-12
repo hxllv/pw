@@ -38,7 +38,7 @@
     <nav>
         <ul>
             <li>
-                <a class="btn-nav" id="onas-link" href="#onas">O nas</a>
+                <a class="btn-nav" id="onas-link" href="#onas">O meni</a>
             </li>
             <li>
                 <a class="btn-nav" id="izdelki-link" href="#izdelki">Izdelki</a>
