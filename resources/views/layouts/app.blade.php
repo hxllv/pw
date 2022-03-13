@@ -7,6 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="keywords" content="pragwald, woodworks, unikatni, leseni, izdelki, les, deske, alkohol, ročno, izdelano, delavnica, javor, oreh, česnja"
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
