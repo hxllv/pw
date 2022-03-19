@@ -9,6 +9,7 @@
 html,
 body {
     margin: 0;
+    padding: 0;
     font-family: $font-family-yaldevi;
     overflow-x: hidden;
     scroll-behavior: smooth;
@@ -133,6 +134,17 @@ p {
     }
 }
 
+.triple-col {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+
+    @media screen and (min-width: $break-768) {
+        grid-template-columns: 25% 50% 25%;
+    }
+}
+
 .p {
     margin: auto;
     width: 100%;
@@ -185,6 +197,18 @@ section {
         border-color: $black;
         color: $white;
     }
+}
+
+.pb-05 {
+    padding-bottom: 0.5em;
+}
+
+.pb-10 {
+    padding-bottom: 1em;
+}
+
+.pb-15 {
+    padding-bottom: 1.5em;
 }
 
 /* ============
@@ -690,7 +714,12 @@ footer {
 
 .blob-container {
     display: flex;
-    align-items: flex-end;
+    padding: 1em;
+    position: relative;
+
+    &-start {
+        align-self: start;
+    }
 }
 
 .blob-image {
@@ -702,6 +731,24 @@ footer {
 
     @media screen and (min-width: $break-768) {
         display: block;
+    }
+
+    &-end {
+        align-self: flex-end;
+    }
+
+    &-abs-sr,
+    &-abs-sl {
+        width: 80vw;
+        position: absolute;
+    }
+
+    &-abs-sr {
+        right: 0;
+    }
+
+    &-abs-sl {
+        left: 0;
     }
 }
 
@@ -721,6 +768,11 @@ footer {
 
 .type {
     margin-top: 2em;
+
+    .description {
+        padding-inline: 4em;
+        padding-bottom: 1em;
+    }
 }
 
 .items {
@@ -768,6 +820,12 @@ footer {
     width: 100%;
     display: flex;
     justify-content: center;
+    background-color: $black;
+    transition: border 0.25s, border-radius 0.25s, width 0.2s ease-out 0s,
+        margin-left 0.2s ease-out 0s, filter 0.3s ease;
+    overflow: hidden;
+    border: 2px solid transparent;
+    border-bottom: none;
 
     picture {
         display: flex;
@@ -777,7 +835,6 @@ footer {
         max-height: 100%;
         max-width: 100%;
         object-fit: cover;
-        transition: max-width 0.2s ease-out 0s, margin-left 0.2s ease-out 0s;
     }
 }
 
@@ -789,9 +846,10 @@ footer {
     padding: 0.3em 0.5em;
     text-shadow: $white-shadow;
     cursor: pointer;
-    transition: text-shadow 0.3s ease;
+    transition: text-shadow 0.3s ease, opacity 0.3s ease;
     background: #1a1a1a;
     border-radius: 10px;
+    opacity: 0;
 
     &:hover,
     &:focus {
@@ -807,8 +865,11 @@ footer {
     padding: 1rem;
     width: 150%;
     z-index: 999;
+    background-color: $black;
     transform: translateX(-50%) scaleX(0);
     opacity: 0;
+    border: 2px solid $green;
+    border-top: none;
     border-radius: 0 0 10px 10px;
     transition: transform 0.4s, opacity 0.15s;
 
@@ -837,7 +898,7 @@ footer {
     }
 }
 
-.details::before,
+/* .details::before,
 .details::after {
     position: absolute;
     content: "";
@@ -867,13 +928,21 @@ footer {
     background-color: $black;
     border-radius: 0 0 10px 10px;
     z-index: -1;
-}
+} */
 
 .item.on {
-    .item-img img {
-        margin-left: calc(-25% - 1rem);
-        max-width: calc(150% + 2rem);
-        transition: max-width 0.2s ease-out 0.2s, margin-left 0.2s ease-out 0.2s;
+    .item-img {
+        border-radius: 10px 10px 0 0;
+        border: 2px solid $green;
+        border-bottom: none;
+        width: calc(150% + 2rem);
+        margin-left: calc(-25% - 1rem - 2px);
+        transition: border 0.25s, border-radius 0.25s, width 0.2s ease-out 0.1s,
+            margin-left 0.2s ease-out 0.1s, filter 0.3s ease;
+    }
+
+    .add-to-cart {
+        opacity: 1;
     }
 
     .details {

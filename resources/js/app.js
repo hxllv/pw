@@ -176,7 +176,7 @@ window.itemMouseEnter = function(item, imgs) {
     const time = setTimeout(() => {
         itemImg.style.zIndex = 999;
         clearTimeout(time);
-    }, 200);
+    }, 100);
 
     const detailsPictures = item.querySelectorAll(".details > picture");
 
@@ -220,7 +220,7 @@ window.itemMouseLeave = function(item) {
     const time = setTimeout(() => {
         itemImg.style.zIndex = 1;
         clearTimeout(time);
-    }, 200);
+    }, 100);
 
     items.forEach(item => {
         const itemImg = item.querySelector(".item-img");
