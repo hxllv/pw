@@ -10,10 +10,12 @@ class Type extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'description'
     ];
 
-    public function hasManyItems() {
+    public function hasManyItems()
+    {
         return $this->hasMany(Item::class);
     }
 }
