@@ -102,8 +102,12 @@ export default {
 
             axios.get(`/getimages/${this.item.id}`).then(response => {
                 this.imgs = response.data;
-                this.maxWidth = 100;
             });
+
+            const time1 = setTimeout(() => {
+                this.maxWidth = 100;
+                clearTimeout(time);
+            }, 400);
         }
     },
     components: { AddToCartComponent }
