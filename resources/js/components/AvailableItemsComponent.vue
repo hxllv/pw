@@ -70,7 +70,7 @@ export default {
 
         tempTypes.forEach(type => {
             let tempArr = tempItems.filter(
-                item => item.type_id === type.id && item.available === 1
+                item => item.type_id == type.id && item.available == 1
             );
 
             console.log(tempArr);
@@ -81,7 +81,7 @@ export default {
             };
         });
 
-        this.notAvailArr = tempItems.filter(item => item.available === 0);
+        this.notAvailArr = tempItems.filter(item => item.available == 0);
 
         console.log(this.notAvailArr);
         console.log(this.fullArr);
