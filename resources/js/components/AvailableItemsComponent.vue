@@ -66,14 +66,10 @@ export default {
         let tempTypes = JSON.parse(this.types);
         let tempItems = JSON.parse(this.items);
 
-        console.log(tempItems);
-
         tempTypes.forEach(type => {
             let tempArr = tempItems.filter(
                 item => item.type_id == type.id && item.available == 1
             );
-
-            console.log(tempArr);
 
             this.fullArr[`type_${type.id}`] = {
                 type: type,
@@ -82,9 +78,6 @@ export default {
         });
 
         this.notAvailArr = tempItems.filter(item => item.available == 0);
-
-        console.log(this.notAvailArr);
-        console.log(this.fullArr);
     },
     data() {
         return {
