@@ -52,105 +52,12 @@
         <div id="izdelki" class="invis-for-nav"></div>
         <div class="container">
             <h1 class="title pirata section-header">Izdelki</h1>
-            <div class="items-subsection">
-                @if (!$items->where('available', '=', true)->count())
-                    <h3 class="text-center">
-                        Žal trenutno ni nobenih izdelkov!
-                    </h3>
-                @endif
-                @foreach ($types as $type)
-                    @if ($type->hasManyItems->where('available', '=', true)->count())
-                        <div class="type">
-                            <h1 class="subtitle divider pirata">{{ $type->name }}</h1>
-                            <p class="description">{{ $type->description }}</p>
-                            <div class="items">
-                                @foreach ($type->hasManyItems->where('available', '=', true) as $item)
-                                    <div class="item" tabindex="0"
-                                        onmouseenter="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})"
-                                        onmouseleave="itemMouseLeave(this)"
-                                        onfocus="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})"
-                                        onfocusout="itemMouseLeave(this)">
-                                        <div class="item-img cleary-prep" style="z-index: 1;">
-                                            <picture>
-                                                <source media="(min-width:2100px)"
-                                                    srcset="/storage/{{ $item->main_image }}">
-                                                <source media="(min-width:1200px)"
-                                                    srcset="/storage/{{ str_replace('/', '/1000_', $item->main_image) }}">
-                                                <img loading="lazy"
-                                                    src="/storage/{{ str_replace('/', '/500_', $item->main_image) }}"
-                                                    alt="{{ $item->title }}">
-                                            </picture>
-                                            <add-to-cart item-id="{{ $item->id }}" item-img="{{ $item->main_image }}"
-                                                item-title="{{ $item->title }}" item-price="{{ $item->price }}">
-                                            </add-to-cart>
-                                        </div>
-                                        <div class="details">
-                                            <h1>
-                                                {{ $item->title }} |
-                                                {{ floor($item->price) == $item->price ? str_replace('.00', '.- ', (string) $item->price) : $item->price }}
-                                                <span class="euro">
-                                                    &euro;
-                                                </span>
-                                            </h1>
-                                            <p>{{ $item->description }}</p>
-                                            @foreach ($imgs->where('item_id', '=', $item->id) as $img)
-                                                <picture>
-                                                    <source media="(min-width:2100px)" srcset="">
-                                                    <source media="(min-width:1200px)" srcset="">
-                                                    <img src="" alt="{{ $item->title }} extra">
-                                                </picture>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
-            <div class="items-subsection">
-                <h1 class="subtitle divider pirata">Izdelki, ki niso več na voljo</h1>
-                <div>
-                    <div class="items">
-                        @foreach ($items as $item)
-                            @if (!$item->available)
-                                <div class="item" tabindex="0"
-                                    onmouseenter="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})"
-                                    onmouseleave="itemMouseLeave(this)"
-                                    onfocus="itemMouseEnter(this, {{ $imgs->where('item_id', '=', $item->id)->map->only(['image'])->values()->toJson() }})"
-                                    onfocusout="itemMouseLeave(this)">
-                                    <div class="item-img cleary-prep" style="z-index: 1;">
-                                        <picture class="cleary-prep">
-                                            <source media="(min-width:2100px)" srcset="/storage/{{ $item->main_image }}">
-                                            <source media="(min-width:1200px)"
-                                                srcset="/storage/{{ str_replace('/', '/1000_', $item->main_image) }}">
-                                            <img loading="lazy"
-                                                src="/storage/{{ str_replace('/', '/500_', $item->main_image) }}"
-                                                alt="{{ $item->title }}">
-                                        </picture>
-                                    </div>
-                                    <div class="details">
-                                        <h1>{{ $item->title }}</h1>
-                                        <p>{{ $item->description }}</p>
-                                        @foreach ($imgs->where('item_id', '=', $item->id) as $img)
-                                            <picture>
-                                                <source media="(min-width:2100px)" srcset="">
-                                                <source media="(min-width:1200px)" srcset="">
-                                                <img src="" alt="{{ $item->title }} extra">
-                                            </picture>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+            <avail-items types="{{ $types->toJson() }}" items="{{ $items->toJson() }}"></avail-items>
             <div class="items-subsection" style="z-index: 2">
                 <div class="triple-col">
                     <div class="blob-container">
-                        <img loading="lazy" class="blob-image blob-image-abs-sr"
-                            src="{{ asset('images/blobcomp1.svg') }}" alt="">
+                        <img loading="lazy" class="blob-image blob-image-abs-sr" src="{{ asset('images/blobcomp1.svg') }}"
+                            alt="">
                     </div>
                     <div>
                         <h1 class="bigger-subtitle pirata">Nega lesa</h1>

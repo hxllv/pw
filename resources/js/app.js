@@ -30,6 +30,11 @@ Vue.component(
     "add-to-cart",
     require("./components/AddToCartComponent.vue").default
 );
+Vue.component(
+    "avail-items",
+    require("./components/AvailableItemsComponent.vue").default
+);
+Vue.component("item", require("./components/ItemComponent.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -157,73 +162,3 @@ if (
 
 const items = document.querySelectorAll(".item");
 let onItem = false;
-
-window.itemMouseEnter = function(item, imgs) {
-    if (onItem) return;
-
-    item.classList.add("on");
-    onItem = true;
-
-    items.forEach(notItem => {
-        if (item == notItem) return;
-
-        const notItemImg = notItem.querySelector(".item-img");
-        notItemImg.classList.add("cleary");
-    });
-
-    const itemImg = item.querySelector(".item-img");
-
-    const time = setTimeout(() => {
-        itemImg.style.zIndex = 999;
-        clearTimeout(time);
-    }, 100);
-
-    const detailsPictures = item.querySelectorAll(".details > picture");
-
-    const time1 = setTimeout(() => {
-        for (let i = 0; i < imgs.length; i++) {
-            const { image } = imgs[i];
-            const detailsPictureElements = detailsPictures[i].querySelectorAll(
-                "*"
-            );
-
-            if (detailsPictureElements[0].srcset) {
-                detailsPictureElements[2].style.maxWidth = "100%";
-                continue;
-            }
-
-            const image500 = image.replace("/", "/500_");
-            const image1000 = image.replace("/", "/1000_");
-
-            detailsPictureElements[0].srcset = `/storage/${image}`;
-            detailsPictureElements[1].srcset = `/storage/${image1000}`;
-            detailsPictureElements[2].src = `/storage/${image500}`;
-            detailsPictureElements[2].style.maxWidth = "100%";
-        }
-        clearTimeout(time1);
-    }, 400);
-};
-
-window.itemMouseLeave = function(item) {
-    if (!item.classList.contains("on")) return;
-
-    item.classList.remove("on");
-    onItem = false;
-
-    const itemImg = item.querySelector(".item-img");
-    const detailsPictures = item.querySelectorAll(".details > picture > img");
-    detailsPictures.forEach(detailPic => {
-        detailPic.style.maxWidth = 0;
-    });
-
-    itemImg.style.zIndex = 997;
-    const time = setTimeout(() => {
-        itemImg.style.zIndex = 1;
-        clearTimeout(time);
-    }, 100);
-
-    items.forEach(item => {
-        const itemImg = item.querySelector(".item-img");
-        itemImg.classList.remove("cleary");
-    });
-};

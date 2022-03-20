@@ -94,7 +94,7 @@ export default {
             contactLoad.classList.add("show");
 
             axios
-                .post("/", {
+                .post("/sendmail", {
                     ime: this.ime,
                     priimek: this.priimek,
                     email: this.email,
