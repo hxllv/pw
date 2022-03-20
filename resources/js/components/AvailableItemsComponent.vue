@@ -66,6 +66,8 @@ export default {
         let tempTypes = JSON.parse(this.types);
         let tempItems = JSON.parse(this.items);
 
+        console.log(tempItems);
+
         tempTypes.forEach(type => {
             let tempArr = tempItems.filter(
                 item => item.type_id === type.id && item.available === 1
