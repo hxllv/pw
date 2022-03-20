@@ -121,13 +121,14 @@ if (
 
     const observerSectionOptions = {
         root: null,
-        rootMargin: "0px 0px 0px 0px",
-        threshold: 0.3
+        rootMargin: "-200px 0px -200px 0px"
     };
 
     let sectionObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             let link = null;
+
+            console.log(entry.target);
 
             switch (entry.target) {
                 case sections.onas:
@@ -155,10 +156,3 @@ if (
     navbar.classList.add("off-start");
     logo.classList.add("off-start");
 }
-
-/* =============
-  item styling
-============= */
-
-const items = document.querySelectorAll(".item");
-let onItem = false;
