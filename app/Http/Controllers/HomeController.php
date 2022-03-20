@@ -39,6 +39,13 @@ class HomeController extends Controller
         return view('home')->with("types", $types)->with("items", $items)->with("imgs", $imgs);
     }
 
+    public function imgs(\App\Models\Item $item)
+    {
+        $imgs = $item->hasManyImages()->get();
+
+        return response()->json($imgs, 200);
+    }
+
     public function mail()
     {
         $captchaResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [

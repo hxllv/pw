@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/', [App\Http\Controllers\HomeController::class, 'mail'])->name('mail');
+Route::post('/sendmail', [App\Http\Controllers\HomeController::class, 'mail'])->name('mail');
+Route::get('/getimages/{item}', [App\Http\Controllers\HomeController::class, 'imgs'])->name('getimages');
 
 Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout/items', [App\Http\Controllers\CheckoutController::class, 'checkItems']);
