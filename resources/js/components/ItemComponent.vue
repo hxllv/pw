@@ -33,11 +33,11 @@
         </div>
         <div class="details">
             <h1>
-                {{ item.title }} |
+                {{ item.title }}
                 {{
-                    Math.floor(item.price) == item.price
-                        ? String(item.price).replace(".00", ".- ")
-                        : item.price
+                    Math.floor(item.price) == item.price && avail
+                        ? " | " + String(item.price).replace(".00", ".- ")
+                        : " | " + item.price
                 }}
                 <span class="euro">
                     &euro;
