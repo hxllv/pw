@@ -35,11 +35,14 @@
             <h1>
                 {{ item.title }}
                 {{
-                    Math.floor(item.price) == item.price && avail
-                        ? " | " + String(item.price).replace(".00", ".- ")
-                        : " | " + item.price
+                    avail
+                        ? " | " +
+                          (Math.floor(item.price) == item.price
+                              ? String(item.price).replace(".00", ".- ")
+                              : item.price)
+                        : ""
                 }}
-                <span class="euro">
+                <span class="euro" v-if="avail">
                     &euro;
                 </span>
             </h1>

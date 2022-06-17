@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}?v=1.1.2" defer></script>
+    <script src="{{ asset('js/app.js') }}?v=1.1.3" defer></script>
     <script src="https://kit.fontawesome.com/be4cbb0046.js" crossorigin="anonymous"></script>
 
     @yield('scripts')
