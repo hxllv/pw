@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Order;
 use Exception;
 use App\Mail\OrderMail;
 use Illuminate\Support\Str;
@@ -47,10 +48,18 @@ class CheckoutController extends Controller
                 return response()->json(['success' => false]);
             }
 
-            foreach (session('items') as $item) {
+            /* foreach (session('items') as $item) {
                 $item->available = false;
                 $item->save();
-            }
+            } */
+
+            Order::create([
+                'id' => $uuid,
+                'user_data' => json_encode(session('userData')),
+                'items' => json_encode(collect(session('items'))->pluck("id")),
+                'price' => session('price'),
+                'notes' => session('notes')
+            ]);
 
             session()->forget(['userData', 'items', 'price', 'notes']);
             session()->regenerate();
