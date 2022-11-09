@@ -36,6 +36,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/item/create', [App\Http\Controllers\AdminController::class, 'createItem'])->name('admin-create-item');
     Route::post('/item', [App\Http\Controllers\AdminController::class, 'storeItem'])->name('admin-store-item');
+    Route::get('/items', [App\Http\Controllers\AdminController::class, 'items'])->name('admin-show-items');
     Route::get('/item/{item}', [App\Http\Controllers\AdminController::class, 'showItem'])->name('admin-show-item');
     Route::get('/item/{item}/edit', [App\Http\Controllers\AdminController::class, 'editItem'])->name('admin-edit-item');
     Route::patch('/item/{item}', [App\Http\Controllers\AdminController::class, 'updateItem'])->name('admin-update-item');

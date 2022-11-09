@@ -17,7 +17,9 @@
                     <a href="{{ route('admin-create-item') }}">Dodaj izdelek</a>
                 </li>
 
-                <li class="p-2">
+                <a href="{{ route('admin-show-items', -1) }}" class="btn btn-secondary">Vsi izdelki</a>
+
+                {{-- <li class="p-2">
                     <div class="dropdown show">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Izberi izdelek
@@ -29,7 +31,7 @@
                             @endforeach
                         </div>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </li>
 

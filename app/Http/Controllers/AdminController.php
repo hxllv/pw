@@ -22,6 +22,27 @@ class AdminController extends Controller
         return view('admin.admin')->with('items', $items)->with('types', $types);
     }
 
+    public function items(Request $req)
+    {
+        $types = Type::get();
+        $items = Item::get();
+
+        $type = $req->input('type');
+        $avail = $req->input('avail');
+
+        if ($type !== null) 
+        {
+            $items = collect($items->where("type_id", $type)->all());
+        }
+
+        if ($avail !== null)
+        {
+            $items = collect($items->where("available", $avail)->all());
+        }
+
+        return view('admin.items')->with('items', $items)->with('types', $types)->with("curType", $type);
+    }
+
     public function createItem()
     {
         $types = Type::get();
