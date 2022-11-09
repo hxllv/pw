@@ -68,7 +68,7 @@ class HomeController extends Controller
             Mail::to("info@pragwald-woodworks.si")->send(new MessageMail($data));
 
             if (count(Mail::failures()) > 0) {
-                return response()->json(['success' => false]);
+                return response()->json(['success' => false, 'fail' => Mail::failures()]);
             }
 
             return response()->json(['success' => true]);
