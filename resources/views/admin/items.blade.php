@@ -1,55 +1,54 @@
 @extends('layouts.admin')
 
 @section('scripts')
-
 @endsection
 
 @section('content')
+    <div class="container">
+        <a href="{{ route('admin-index') }}">Nazaj na admin page</a>
+        {{-- <input id="id-type" type="hidden" value="{{$item["id_type"]}}" name="id"/> --}}
 
-<div class="container">
-    <a href="{{ route('admin-index') }}">Nazaj na admin page</a>
-    {{-- <input id="id-type" type="hidden" value="{{$item["id_type"]}}" name="id"/> --}}
+        @if ($curType !== null)
+            <h2>{{ $types->where('id', $curType)->first()->name }}</h2>
+        @else
+            <h2>Vsi izdelki</h2>
+        @endif
 
-    @if ($curType !== null)
-        <h2>{{ $types->where("id", $curType)->first()->name }}</h2>
-    @else
-        <h2>Vsi izdelki</h2>
-    @endif
+        <form action="{{ route('admin-show-items') }}">
+            <label for="type">Tip:</label>
+            <select name="type" id="type">
+                <option value="">Vsi izdelki</option>
+                @foreach ($types as $type)
+                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                @endforeach
+            </select>
+            <label for="avail">Razpoložljivost:</label>
+            <select name="avail" id="avail">
+                <option value="">Vsi izdelki</option>
+                <option value="1">Na voljo</option>
+                <option value="0">Ni voljo</option>
+            </select>
+            <input type="submit" value="Filtriraj">
+        </form>
 
-    <form action="{{ route('admin-show-items') }}">
-        <label for="type">Tip:</label>
-        <select name="type" id="type">
-            <option value="">Vsi izdelki</option>
-            @foreach ($types as $type)
-                <option value="{{ $type->id }}">{{ $type->name }}</option>
+        <div class="row">
+            @foreach ($items as $item)
+                <a class="col-sm-4" href="{{ route('admin-show-item', $item->id) }}">
+                    <div class="card">
+                        <img src="/storage/{{ str_replace('/', '/500_', $item->main_image) }}" class="card-img-top"
+                            alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $item->title }}</h5>
+                            <p class="card-text">{{ $item->price }}</p>
+                            <p class="card-text">{{ $types->where('id', $item->type_id)->first()->name }}</p>
+                            <p class="card-text">{{ $item->available === 1 ? 'Na voljo' : 'Ni na voljo' }}</p>
+                        </div>
+                    </div>
+                </a>
             @endforeach
-        </select>
-        <label for="avail">Razpoložljivost:</label>
-        <select name="avail" id="avail">
-            <option value="">Vsi izdelki</option>
-            <option value="1">Na voljo</option>
-            <option value="0">Ni voljo</option>
-        </select>
-        <input type="submit" value="Filtriraj">
-    </form>
+        </div>
 
-    <div class="row">
-        @foreach ($items as $item)
-        <a class="col-sm-4" href="{{ route('admin-show-item', $item->id) }}">
-            <div class="card">
-                <img src="/storage/{{ $item->main_image }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $item->title }}</h5>
-                    <p class="card-text">{{ $item->price }}</p>
-                    <p class="card-text">{{ $types->where("id", $item->type_id)->first()->name }}</p>
-                    <p class="card-text">{{ $item->available === 1 ? "Na voljo" : "Ni na voljo" }}</p> 
-                </div>
-            </div>
-        </a>
-        @endforeach
-    </div>
-
-    {{-- <div style="opacity: 1;">
+        {{-- <div style="opacity: 1;">
         <ul>
             <li>
                 <label>Naslov: </label>
@@ -98,6 +97,5 @@
         <edit-avail avail="{{ $item->available }}" id="{{ $item->id }}"></edit-avail>
     </div> --}}
 
-</div>
-
+    </div>
 @endsection
