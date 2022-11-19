@@ -71,7 +71,7 @@
             <div class="contacts">
                 <div class="name-email">
                     <span>Žan Vozlič | <a class="email-white"
-                            href="mailto:info@pragwald-woodworks.si">info@pragwald-woodworks.si</a></span>
+                            href="mailto:pragwaldwoodworks@gmail.com">pragwaldwoodworks@gmail.com</a></span>
                 </div>
                 <div class="name-email">
                     <span>Nace Tavčer | <a class="email-white"

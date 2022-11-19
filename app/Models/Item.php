@@ -17,11 +17,13 @@ class Item extends Model
         'main_image'
     ];
 
-    public function belongsToType() {
+    public function belongsToType()
+    {
         return $this->belongsTo(Type::class, 'type_id');
     }
 
-    public function hasManyImages() {
+    public function hasManyImages()
+    {
         return $this->hasMany(Image::class);
     }
 }

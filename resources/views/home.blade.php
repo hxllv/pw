@@ -42,7 +42,8 @@
                     </p>
                 </div>
                 <div class="blob-container">
-                    <img loading="lazy" class="blob-image blob-image-end" src="{{ asset('images/blobcomp.svg') }}" alt="">
+                    <img loading="lazy" class="blob-image blob-image-end" src="{{ asset('images/blobcomp.svg') }}"
+                        alt="">
                 </div>
             </div>
         </div>
@@ -184,7 +185,7 @@
             <p class="p text-center">
                 So ti izdelki, ki niso več na voljo, všeč in bi si želel/a kaj podobnega? Potem mi pišite preko kontaktnega
                 obrazca spodaj, na email naslov <a class="email"
-                    href="mailto:info@pragwald-woodworks.si">info@pragwald-woodworks.si</a>, ali pa pokličite pokličite na
+                    href="mailto:pragwaldwoodworks@gmail.com">pragwaldwoodworks@gmail.com</a>, ali pa pokličite na
                 <a class="email" href="">051 318 599</a>. Nobena želja ni prevelika!
             </p>
             <div>
