@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="items-subsection">
+        <!-- <div class="items-subsection">
             <h1 class="subtitle divider pirata">
                 Izdelki, ki niso več na voljo
             </h1>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
