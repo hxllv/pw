@@ -23,7 +23,7 @@
         rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}?v=1.1.1" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?v=1.1.2" rel="stylesheet">
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">
