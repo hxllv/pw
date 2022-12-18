@@ -48,11 +48,17 @@ class HomeController extends Controller
 
     public function mail()
     {
-        $captchaResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => "6LfYy7IcAAAAAODUQ8HhbRVp0m-Ss1WdGIGqGMUW",
-            'response' => request('token'),
-            'remoteip' => request()->ip()
-        ])->json();
+        $captchaResponse = null;
+
+        if (env("APP_ENV") == "local")
+            $captchaResponse['success'] = true;
+
+        if (env("APP_ENV") != "local")
+            $captchaResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => "6LfYy7IcAAAAAODUQ8HhbRVp0m-Ss1WdGIGqGMUW",
+                'response' => request('token'),
+                'remoteip' => request()->ip()
+            ])->json();
 
         if ($captchaResponse['success']) {
 

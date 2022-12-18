@@ -41,11 +41,14 @@
         <div class="contact-form-input contact-form-has-recaptcha">
             <div class="contact-form-recaptcha">
                 <vue-recaptcha
+                    v-if="local !== 'local'"
                     :load-recaptcha-script="true"
                     ref="recaptcha"
                     @verify="onCaptchaVerified"
                     @expired="onCaptchaExpired"
-                    sitekey="6LfYy7IcAAAAADHJIeDTvhU1XPnhR0LIclRJ5F2t"
+                    sitekey="
+                        6LfYy7IcAAAAADHJIeDTvhU1XPnhR0LIclRJ5F2t
+                    "
                 ></vue-recaptcha>
             </div>
         </div>
@@ -76,6 +79,11 @@ export default {
             sporocilo: "",
             captchaToken: null
         };
+    },
+    props: ["local"],
+    mounted() {
+        console.log(this.local);
+        if (this.local === "local") this.$refs.formSubmit.disabled = false;
     },
     methods: {
         onCaptchaVerified(token) {
@@ -124,8 +132,11 @@ export default {
                         contactStatus.innerHTML = "X";
                     }
 
-                    this.$refs.recaptcha.reset();
-                    this.$refs.formSubmit.disabled = true;
+                    if (this.local != "local") {
+                        this.$refs.recaptcha.reset();
+                        this.$refs.formSubmit.disabled = true;
+                    }
+
                     contactStatus.classList.add("show");
 
                     const time = setTimeout(() => {

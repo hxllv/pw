@@ -189,7 +189,7 @@
                 <a class="email" href="">051 318 599</a>. Nobena želja ni prevelika!
             </p>
             <div>
-                <send-message></send-message>
+                <send-message local="{{ env('APP_ENV') }}"></send-message>
             </div>
         </div>
     </section>
