@@ -869,7 +869,7 @@ footer {
     width: 150%;
     z-index: 999;
     background-color: $black;
-    transform: translateX(-50%) scaleX(0.6255);
+    transform: translateX(-50%) scaleX(0.6255) scaleY(0);
     opacity: 0;
     border-top: none;
     border-radius: 0 0 10px 10px;
@@ -950,7 +950,7 @@ footer {
     }
 
     .details {
-        transform: translateX(-50%) scaleX(1);
+        transform: translateX(-50%) scaleX(1) scaleY(1);
         opacity: 1;
         transition: transform 0.2s ease-out 0.1s, opacity 0.15s;
 
