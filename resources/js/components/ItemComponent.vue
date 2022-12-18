@@ -109,7 +109,7 @@ export default {
 
             const time1 = setTimeout(() => {
                 this.maxWidth = 100;
-                clearTimeout(time);
+                clearTimeout(time1);
             }, 400);
         }
     },
