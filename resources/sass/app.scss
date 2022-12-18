@@ -211,6 +211,10 @@ section {
     padding-bottom: 1.5em;
 }
 
+.pi-10 {
+    padding-inline: 1em;
+}
+
 /* ============
   animations
 =============*/
@@ -772,6 +776,15 @@ footer {
     .description {
         padding-inline: 4em;
         padding-bottom: 1em;
+        width: 100%;
+
+        @media screen and (min-width: $break-768) {
+            width: 70%;
+        }
+
+        @media screen and (min-width: $break-1000) {
+            width: 60%;
+        }
     }
 }
 

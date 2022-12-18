@@ -62,14 +62,14 @@
                     </div>
                     <div>
                         <h1 class="bigger-subtitle pirata">Nega lesa</h1>
-                        <p class="pb-15">
+                        <p class="pb-15 pi-10">
                             S pravilno oskrbo kuhinjskih in servisnih desk ter ostalih lesnih izdelkov boste preprečili
                             pokanje ter zvijanje lesa, s tem pa bodo zdržali več let, če ne celo generacij. V lesu namreč
                             delujejo nam nevidne sile, ki pridejo na dan ob nepravilni negi ter hrambi izdelkov. Tukaj
                             izveste, kako za njih pravilno poskrbeti.
                         </p>
                         <h1 class="subtitle pirata">Kako očistiti kuhinjsko/servisno desko?</h1>
-                        <ul class="pb-15">
+                        <ul class="pb-15 pi-10">
                             <li class="pb-05">
                                 Desko vedno operite na roke; če je v stiku z vlažno, lepljivo ali pekočo hrano jo sperite,
                                 če pa na njej režete samo kruh, jo preprosto obrišite.
@@ -93,16 +93,16 @@
                             </li>
                         </ul>
                         <h1 class="subtitle pirata">Zakaj moramo naoljiti kuhinjske/servisne deske?</h1>
-                        <p class="pb-15">
+                        <p class="pb-15 pi-10">
                             Desko je potrebno ustrezno zaščititi z oljem, da ostane sijoča, nekoliko vodoodporna in ne vpija
                             vlage in vonjav iz hrane.
                             Z oljem desko tudi zaščitimo pred nastajanjem bakterij, ki se lahko razvijejo v razpokah, ter
                             pred zvijanjem in pokanjem.
                         </p>
-                        <p class="pb-15">
+                        <p class="pb-15 pi-10">
                             Najboljše olje za to je mineralno olje, katerega tudi sam uporabljam pri svojih izdelkih.
                         </p>
-                        <p class="pb-15">
+                        <p class="pb-15 pi-10">
                             Zakaj bi namesto tistega, ki ga že imate v kuhinji, morali uporabljati posebno olje? Deska ni
                             ponev in za oljenje desk ne smete uporabljati jedilnega olja. Razlog? Žarkost. Tudi zelo
                             stabilno olje, kot je kokosovo olje, bo sčasoma postalo žarko. Največja težava pri tem je vonj
@@ -112,31 +112,31 @@
                             mineralnega olja in čebeljega voska, kar bo poskrbelo, da bo deska v dobrem stanju.
                         </p>
                         <h1 class="subtitle pirata">Kdaj je potrebno kuhinjsko/servisno desko naoljiti?</h1>
-                        <p class="pb-15">
+                        <p class="pb-15 pi-10">
                             Ni čarobne formule za to, kako pogosto morate naoljiti svojo desko. Poglejte jo in vedeli boste,
                             kdaj je čas. Videti bo suha in brez leska. Za vse, ki ste v dvomih, vam lahko povem okvirno
                             formulo, vendar se ta seveda razlikuje od stanja posamezne deske. Desko torej naoljite vsaj
                             dvakrat na letni čas, se pravi osemkrat na leto. Če desko uporabljate velikokrat, je
                             priporočljivo vsaj enkrat na mesec (večkrat, ko jo umijete, večkrat jo je potrebno naoljiti).
                         </p>
-                        <p class="pb-15">
+                        <p class="pb-15 pi-10">
                             Tudi podnebje je pomemben dejavnik. Pozimi na primer moram svoje deske pogosteje namazati z
                             oljem, saj je zrak suh in temperature v hiši nihajo.
                         </p>
-                        <p class="pb-15">
+                        <p class="pb-15 pi-10">
                             Če se deska kjer koli močno razcepi, je čas, da kupite drugo. V te dele lahko pride hrana in
                             vlaga, kar povzroči nastanek bakterij.
                         </p>
                         <h1 class="subtitle pirata">Kako naoljiti kuhinjsko/servisno desko?</h1>
-                        <p>Potrebovali boste:</p>
-                        <ul>
+                        <p class="pi-10">Potrebovali boste:</p>
+                        <ul class="pi-10">
                             <li class="pb-05">čisto in suho desko</li>
                             <li class="pb-05">mineralno olje in/ali vosek</li>
                             <li class="pb-05">čisto krpo (najbolje so čisti kosi starih majic ali volnenih
                                 nogavic)</li>
                         </ul>
 
-                        <ol style="padding-inline-start: 20px;">
+                        <ol style="padding-inline-start: 20px;" class="pi-10">
                             <li class="pb-10">Na sredino deske nalijte nekaj mineralnega olja, premera
                                 približno četrtine deske. To se morda zdi veliko, vendar boste videli, koliko tekočine lahko
                                 deska absorbira.</li>
@@ -154,7 +154,7 @@
                                 uporabi krpo zavrzite.</li>
                         </ol>
                         <h1 class="subtitle pirata">Še par trikov za čisto kuhinjsko/servisno desko</h1>
-                        <ul>
+                        <ul class="pi-10">
                             <li class="pb-05">
                                 Po uporabi desko čim prej obrišite, saj tako sokovom preprečite, da bi prodrli v les, hrana
                                 pa naslednjič ne bo imela okusa po prejšnji ki ste jo rezali na deski.

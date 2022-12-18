@@ -46,7 +46,7 @@
                     &euro;
                 </span>
             </h1>
-            <p>{{ item.description }}</p>
+            <p style="padding-inline: 0.5em">{{ item.description }}</p>
             <picture v-for="img in imgs" :key="img.id">
                 <source
                     media="(min-width:2100px)"
