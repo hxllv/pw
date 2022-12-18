@@ -863,17 +863,19 @@ footer {
 }
 
 .details {
+    //display: none;
     position: absolute;
     left: 50%;
-    padding: 1rem;
+    padding: none;
+    height: 0%;
     width: 150%;
     z-index: 999;
     background-color: $black;
-    transform: translateX(-50%) scaleX(0.6255) scaleY(0);
+    transform: translateX(-50%) scaleX(0.6255);
     opacity: 0;
     border-top: none;
     border-radius: 0 0 10px 10px;
-    transition: transform 0.2s ease-out 0s, opacity 0.15s;
+    transition: transform 0.2s ease-out 0s, opacity 0.15s, height 0s ease 0.2s, padding 0s ease 0.2s;
     box-shadow:  inset 0px 0px 33px -11px #dddddd20;
 
     h1,
@@ -882,9 +884,10 @@ footer {
     div,
     a {
         opacity: 0;
+        transform: scaleX(0);
 
         --delay: 0s;
-        --time: 0.05s;
+        --time: 0s;
         transition: opacity var(--time) ease-in var(--delay);
     }
 
@@ -950,8 +953,10 @@ footer {
     }
 
     .details {
-        transform: translateX(-50%) scaleX(1) scaleY(1);
+        transform: translateX(-50%) scaleX(1);
         opacity: 1;
+        padding: 1rem;
+        height: auto;
         transition: transform 0.2s ease-out 0.1s, opacity 0.15s;
 
         h1,
@@ -959,6 +964,7 @@ footer {
         img,
         div,
         a {
+            transform: scaleX(1);
             opacity: 1;
             --time: 0.3s;
             --delay: 0.3s;
